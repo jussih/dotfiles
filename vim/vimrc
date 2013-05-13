@@ -66,11 +66,11 @@ function! HasPaste()
 endfunction
 "set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
-hi User1 guifg=#eea040 guibg=#222922
-hi User2 guifg=#dd3333 guibg=#222922
-hi User3 guifg=#ff66ff guibg=#222922
-hi User4 guifg=#a0ee40 guibg=#222922
-hi User5 guifg=#eeee40 guibg=#222922
+hi User1 guifg=#eea040 guibg=#222922 ctermbg=17
+hi User2 guifg=#dd3333 guibg=#222922 ctermbg=17
+hi User3 guifg=#ff66ff guibg=#222922 ctermbg=17
+hi User4 guifg=#a0ee40 guibg=#222922 ctermbg=17
+hi User5 guifg=#eeee40 guibg=#222922 ctermbg=17
 
 set statusline=
 set statusline +=%1*\ %n\ %*            "buffer number
