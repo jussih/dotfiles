@@ -195,6 +195,8 @@ augroup END
 
 " Treat .json files as .js
 autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+" Treat .ino files as .cpp
+autocmd BufNewFile,BufRead *.ino setfiletype arduino syntax=cpp
 
 nnoremap g; g;zz
 
@@ -251,15 +253,15 @@ endif
 " ========== Plugin Settings =========="
 
 " Mapping to NERDTree
-nnoremap <C-n> :NERDTreeToggle<cr>
-let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$']
-
+nnoremap <F3> :NERDTreeToggle<cr>
+let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
+let NERDTreeChDirMode = 2
 " Bind ctrlp to ctrl-p
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
-" Mini Buffer some settigns."
+" Mini Buffer some settings."
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
@@ -276,8 +278,8 @@ let g:SuperTabDefaultCompletionType = "context"
 
 
 " Tagbar key bindings."
-nmap <leader>t <ESC>:TagbarToggle<cr>
-imap <leader>t <ESC>:TagbarToggle<cr>i
+nnoremap <silent> <F10> :TagbarToggle<cr>
+nnoremap <silent> <F9> :TagbarOpen fj<cr>
 
 " Snipmate using bellow VIM's default keys, just unmap it.
 
