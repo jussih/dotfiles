@@ -224,6 +224,8 @@ if has("gui_running")
     colo badwolf
     set listchars=tab:▸\ ,eol:¬         " Invisibles using the Textmate style
     set guifont=Consolas:h9
+	"on linux
+	"set guifont=Inconsolata\ 12
 else
     set t_Co=256
     colorschem badwolf
