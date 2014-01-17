@@ -54,7 +54,7 @@ set title
 set dictionary=/usr/share/dict/words
 
 " Make pasting done without any indentation break."
-set pastetoggle=<F3>
+set pastetoggle=<F4>
 
 " Format the status line
 " Returns true if paste mode is enabled
@@ -115,19 +115,6 @@ set formatoptions=qrn1
 "set list
 set listchars=tab:▸\ ,eol:¬
 
-" Naviagations using keys up/down/left/right
-" Disabling default keys to learn the hjkl
-"nnoremap <up> <nop>
-"nnoremap <down> <nop>
-"nnoremap <left> <nop>
-"nnoremap <right> <nop>
-"inoremap <up> <nop>
-"inoremap <down> <nop>
-"inoremap <left> <nop>
-"inoremap <right> <nop>
-"nnoremap j gj
-"nnoremap k gk
-
 " Rope settings."
 "inoremap <leader>j <ESC>:RopeGotoDefinition<cr>
 
@@ -158,6 +145,8 @@ nnoremap <leader>v V`]
 
 " ,ev Shortcut to edit .vimrc file on the fly on a vertical window.
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
+nnoremap <leader>w <ESC>:w<cr>
 
 " jj For Qicker Escaping between normal and editing mode.
 "inoremap jj <ESC>
@@ -197,8 +186,6 @@ augroup END
 autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 " Treat .ino files as .cpp
 autocmd BufNewFile,BufRead *.ino setfiletype arduino syntax=cpp
-
-nnoremap g; g;zz
 
 " Move lines
 nnoremap <C-S-down> :m .+1<CR>==
@@ -240,14 +227,6 @@ else
     map! <ESC>[B <C-Down>
 endif
 
-" Special Settings for Consoles
-"if !has("gui_running")
-"    set t_Co=256
-"    colorschem badwolf
-"endif
-
-" Source the vimrc file after saving it
-"autocmd bufwritepost .vimrc source ~/.vimrc
 
 " ========== END Gvim Settings ==========
 
