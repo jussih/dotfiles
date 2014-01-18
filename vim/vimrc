@@ -233,27 +233,35 @@ endif
 
 " ========== Plugin Settings =========="
 
-" Mapping to NERDTree
+" NERDTree
 nnoremap <F3> :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
 let NERDTreeChDirMode = 2
-" Bind ctrlp to ctrl-p
+
+" ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 
-" Mini Buffer some settings."
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
+" MiniBufExplorer
+nnoremap <silent> <F2> :MBEToggle<cr>
+inoremap <silent> <F2> <ESC>:MBEToggle<cr>i
+let g:miniBufExplUseSingleClick = 1
+let g:miniBufExplCycleArround = 1
+" normal next/prev
+"noremap <C-TAB>   :MBEbn<CR>
+"noremap <C-S-TAB> :MBEbp<CR>
+" most recently used next/prev
+noremap <C-TAB>   :MBEbf<CR>
+noremap <C-S-TAB> :MBEbb<CR>
 
 
 "SuperTab options
 "let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 "let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 "let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
-
+"supertab has problems, mapping changed
+let g:SuperTabMappingForward = '<c-S>'
 let g:SuperTabDefaultCompletionType = "context"
 "let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
@@ -265,6 +273,9 @@ nnoremap <silent> <F9> :TagbarOpen fj<cr>
 
 " Tell jedi to use buffers, not vim tabs
 let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#use_splits_not_buffers = "right"
 
+
+"
 " =========== END Plugin Settings =========="
 "
