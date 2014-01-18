@@ -19,3 +19,6 @@
 [submodule "vim/vimfiles/bundle/tagbar"]
 	path = vim/vimfiles/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
+[submodule "vim/vimfiles/bundle/ultisnips"]
+	path = vim/vimfiles/bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
