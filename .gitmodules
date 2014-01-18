@@ -19,6 +19,3 @@
 [submodule "vim/vimfiles/bundle/tagbar"]
 	path = vim/vimfiles/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
-[submodule "vim/vimfiles/bundle/snipMate"]
-	path = vim/vimfiles/bundle/snipMate
-	url = https://github.com/msanders/snipmate.vim.git
