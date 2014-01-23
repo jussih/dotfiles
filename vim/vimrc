@@ -148,6 +148,8 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
 nnoremap <leader>w <ESC>:w<cr>
 
+inoremap <home> <c-o>^
+
 " jj For Qicker Escaping between normal and editing mode.
 "inoremap jj <ESC>
 
@@ -275,6 +277,12 @@ nnoremap <silent> <F9> :TagbarOpen fj<cr>
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#use_splits_not_buffers = "right"
 
+" Syntastic 
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_always_populate_loc_list = 1
+nnoremap <F11> :w<cr>:SyntasticCheck<cr>:Errors<cr>
+inoremap <F11> <ESC>:w<cr>:SyntasticCheck<cr>:Errors<cr>
+ 
 
 "
 " =========== END Plugin Settings =========="
