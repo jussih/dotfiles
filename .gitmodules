@@ -22,3 +22,6 @@
 [submodule "vim/vimfiles/bundle/ultisnips"]
 	path = vim/vimfiles/bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
+[submodule "vim/vimfiles/bundle/syntastic"]
+	path = vim/vimfiles/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
