@@ -7,21 +7,19 @@ call pathogen#infect()
 Helptags
 filetype plugin indent on
 
-" Make vim incompatbile to vi.
 set nocompatible
 set modelines=0
 
-"TAB settings.
+" Indenting settings.
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
 set smarttab
+set autoindent
 
-" More Common Settings.
 set encoding=utf-8
 set scrolloff=3
-set autoindent
 set showmode
 set showcmd
 set hidden
@@ -40,23 +38,18 @@ set laststatus=2
 set number
 set norelativenumber
 
-"set undofile
-"set shell=/bin/bash
 set lazyredraw
 set matchtime=3
 
-"Changing Leader Key
+" Changing Leader Key
 let mapleader = ","
 
 " Set title to window
 set title 
-" Dictionary path, from which the words are being looked up.
-set dictionary=/usr/share/dict/words
 
-" Make pasting done without any indentation break."
+" Toggle to disable autoindent
 set pastetoggle=<F4>
 
-" Format the status line
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
@@ -64,7 +57,6 @@ function! HasPaste()
     en
     return ''
 endfunction
-"set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
 hi User1 guifg=#eea040 guibg=#222922 ctermbg=17
 hi User2 guifg=#dd3333 guibg=#222922 ctermbg=17
@@ -78,11 +70,10 @@ set statusline +=%5*%{&ff}%*            "file format
 set statusline +=%3*%y%*                "file type
 set statusline +=%4*\ %<%F%*            "full path
 set statusline +=%2*%m%*                "modified flag
+"set statusline +=%{HasPaste()}         "paste flag
 set statusline +=%1*%=%5l%*             "current line
 set statusline +=%2*/%L%*               "total lines
 
-
-" Make Vim able to edit corntab fiels again.
 set backupskip=/tmp/*,/private/tmp/*"
 
 " Enable Mouse
@@ -91,7 +82,7 @@ set mouse=a
 " Don't show intro message when starting
 set shortmess=atI
 
-"Settings for Searching and Moving
+" Settings for Searching and Moving
 nnoremap / /\v
 vnoremap / /\v
 set ignorecase
@@ -100,38 +91,32 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
+"clear highlights
 nnoremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
 
-" Make Vim to handle long lines nicely.
+" Make Vim handle long lines nicely.
 set wrap
 set textwidth=79
 set formatoptions=qrn1
 "set colorcolumn=79
 
-" To  show special characters in Vim
+" Do not display whitespace characters
 "set list
 set listchars=tab:▸\ ,eol:¬
 
-" Rope settings."
-"inoremap <leader>j <ESC>:RopeGotoDefinition<cr>
-
-" Get Rid of stupid Goddamned help keys
+" Disable help key
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-" Map : to ; also in command mode.
+" Map : to ; in command mode.
 nnoremap ; :
 
-" Set vim to save the file on focus out.
-"au FocusLost * :wa
-
-" Adding More Shorcuts keys using leader kye.
-" Leader Kye provide separate namespace for specific commands.
-",W Command to remove white space from a file.
+" Leader Key mappings
+" ,W Remove trailing whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " ,ft Fold tag, helpful for HTML editing.
@@ -146,18 +131,14 @@ nnoremap <leader>v V`]
 " ,ev Shortcut to edit .vimrc file on the fly on a vertical window.
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
+" ,w save current file
 nnoremap <leader>w <ESC>:w<cr>
 
+" Home key moves to beginning of text instead of column 0
 inoremap <home> <c-o>^
 
-" jj For Qicker Escaping between normal and editing mode.
-"inoremap jj <ESC>
-
-
-" Working with split screen nicely
-" Resize Split When the window is resized"
+" Resize split when the window is resized
 au VimResized * :wincmd =
-
 
 " Wildmenu completion "
 set wildmenu
@@ -168,13 +149,12 @@ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg "Binary Imgs"
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest "Compiled Object files"
 set wildignore+=*.spl "Compiled speolling world list"
 set wildignore+=*.sw? "Vim swap files"
-set wildignore+=*.DS_Store "OSX SHIT"
+set wildignore+=*.DS_Store "OSX"
 set wildignore+=*.luac "Lua byte code"
-set wildignore+=migrations "Django migrations"
 set wildignore+=*.pyc "Python Object codes"
 set wildignore+=*.orig "Merge resolution files"
 
-" Make Sure that Vim returns to the same line when we reopen a file"
+" Make Sure that Vim returns to the same line when we reopen a file
 augroup line_return
     au!
     au BufReadPost *
@@ -182,7 +162,6 @@ augroup line_return
         \ execute 'normal! g`"zvzz' |
         \ endif
 augroup END
-
 
 " Treat .json files as .js
 autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
@@ -199,25 +178,23 @@ vnoremap <C-S-up> :m '<-2<CR>gv=gv
 
 " =========== END Basic Vim Settings ===========
 
-
 " =========== Gvim Settings =============
 
-" Removing scrollbars
 if has("gui_running")
     set guitablabel=%-0.12t%M
-    "set guioptions-=T
-    "set guioptions-=r
+    set guioptions-=T "toolbar off
+    set guioptions+=r "scrollbars enabled
     "set guioptions-=L
-    "set guioptions+=a
-    "set guioptions-=m
-    colo badwolf
-    set listchars=tab:▸\ ,eol:¬         " Invisibles using the Textmate style
-    set guifont=Consolas:h9
-	"on linux
-	"set guifont=Inconsolata\ 12
+    set guioptions+=a
+    set guioptions-=m "menu disabled
+    colorscheme badwolf
+    "windows font
+    "set guifont=Consolas:h9
+	"linux font
+	set guifont=Inconsolata\ 12
 else
     set t_Co=256
-    colorschem badwolf
+    colorscheme badwolf
     "fix ctrl-arrow keys with putty
     map <ESC>[D <C-Left>
     map <ESC>[C <C-Right>
@@ -257,23 +234,21 @@ let g:miniBufExplCycleArround = 1
 noremap <C-TAB>   :MBEbf<CR>
 noremap <C-S-TAB> :MBEbb<CR>
 
-
-"SuperTab options
+" SuperTab
 "let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 "let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 "let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
-"supertab has problems, mapping changed
-let g:SuperTabMappingForward = '<c-S>'
 let g:SuperTabDefaultCompletionType = "context"
 "let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
+" DelimitMate
+let delimitMate_expand_cr = 1
 
-" Tagbar key bindings."
+" Tagbar
 nnoremap <silent> <F10> :TagbarToggle<cr>
 nnoremap <silent> <F9> :TagbarOpen fj<cr>
 
-
-" Tell jedi to use buffers, not vim tabs
+" Jedi
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#use_splits_not_buffers = "right"
 
