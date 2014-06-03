@@ -11,9 +11,9 @@ set nocompatible
 set modelines=0
 
 " Indenting settings.
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set smarttab
 set autoindent
@@ -176,6 +176,22 @@ inoremap <C-S-up> <Esc>:m .-2<CR>==gi
 vnoremap <C-S-down> :m '>+1<CR>gv=gv
 vnoremap <C-S-up> :m '<-2<CR>gv=gv
 
+" Quoting
+"   single quote word
+nnoremap qw :silent! normal "zyiw<Esc>:let @z="'".@z."'"<CR>cw<c-r>z<Esc>b
+"   double quote word
+nnoremap qd :silent! normal "zyiw<Esc>:let @z="\"".@z."\""<CR>cw<c-r>z<Esc>b
+"   single and double quote visual selection
+vmap <silent> qw :call Quote("'")<CR>
+vmap <silent> qd :call Quote('"')<CR>
+function! Quote(quote)
+  let save = @"
+  silent normal gvy
+  let @" = a:quote . @" . a:quote
+  silent normal gvp
+  let @" = save
+endfunction
+
 " =========== END Basic Vim Settings ===========
 
 " =========== Gvim Settings =============
@@ -251,6 +267,7 @@ nnoremap <silent> <F9> :TagbarOpen fj<cr>
 " Jedi
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#show_call_signatures = 0 "sometimes buggy
 
 " Syntastic 
 let g:syntastic_python_checkers = ['flake8']
@@ -258,6 +275,10 @@ let g:syntastic_always_populate_loc_list = 1
 nnoremap <F11> :w<cr>:SyntasticCheck<cr>:Errors<cr>
 inoremap <F11> <ESC>:w<cr>:SyntasticCheck<cr>:Errors<cr>
  
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 "
 " =========== END Plugin Settings =========="
