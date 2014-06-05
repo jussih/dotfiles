@@ -237,11 +237,13 @@ let NERDTreeChDirMode = 2
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+noremap <c-b> :CtrlPBuffer<cr>
 
 " MiniBufExplorer
 nnoremap <silent> <F2> :MBEToggle<cr>
 inoremap <silent> <F2> <ESC>:MBEToggle<cr>i
 let g:miniBufExplUseSingleClick = 1
+let g:miniBufExplorerAutoStart = 0
 let g:miniBufExplCycleArround = 1
 " normal next/prev
 "noremap <C-TAB>   :MBEbn<CR>

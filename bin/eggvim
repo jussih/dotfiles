@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ -d "$PWD/eggs" ]; then
+  for egg in $PWD/eggs/*.egg 
+  do
+    PYTHONPATH=$egg:$PYTHONPATH
+  done
+fi
+if [ -d "$PWD/src" ]; then
+  for pkg in $PWD/src/* 
+  do
+    PYTHONPATH=$pkg:$PYTHONPATH
+  done
+fi
+PYTHONPATH=$PYTHONPATH gvim $*

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+my_settings="jussi_settings.py"
+my_config="juba.cfg"
+conf_path="/home/jussi/"
+
+if [ -f "buildout.cfg" ]
+  then
+    cp --no-clobber $conf_path/$my_config .
+    #if [ ! -f "project/$my_settings" ] then
+    cp --no-clobber "$conf_path/$my_settings" project/
+    buildout2.7 -c $my_config
+  #fi
+else
+  echo "This is not a buildout base directory."
+fi
+
