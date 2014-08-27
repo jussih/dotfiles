@@ -12,13 +12,16 @@
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# is used in the bar {} block below.
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+font pango:DejaVu Sans Mono 8
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, if you need a lot of unicode glyphs or
-# right-to-left text rendering, you should instead use pango for rendering and
-# chose a FreeType font, such as:
-# font pango:DejaVu Sans Mono 10
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
 
 # borders
 new_window 1pixel
@@ -155,17 +158,25 @@ bar {
         status_command i3status -c ~/.i3/.i3status.conf
 }
 
-bindsym $mod+Control+l exec "i3lock -i ~/.i3/lock-1024x600.png -c 3e435a"
+# pause dunst during screen lock
+bindsym $mod+Control+l exec "killall -SIGUSR1 dunst && i3lock --nofork -i ~/.i3/lock-1024x600.png -c 3e435a && killall -SIGUSR2 dunst"
 
 # scratchpad
 bindsym $mod+m move scratchpad
 bindsym $mod+o scratchpad show
 
-# pulse audio volume control and backlight
+# Move the current workspace to the next output
+# (effectively toggles when you only have two outputs)
+bindsym $mod+x move workspace to output right
+
+# volume control and backlight
 bindsym XF86AudioLowerVolume exec "amixer set Master 10%-"
 bindsym XF86AudioRaiseVolume exec "amixer set Master 10%+"
 #bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume 0 0
 bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 25 -steps 1
 bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 25 -steps 1
 
-exec "dropbox start"
+for_window [class="^Spotify$"] floating enable
+
+#exec "dropbox start"
+exec "dunst -config ~/.i3/dunstrc"
