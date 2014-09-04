@@ -6,7 +6,7 @@
     indicate_hidden = true
     # geometry = "x5"
     idle_threshold = 0
-    geometry = "350x5-30+30"
+    geometry = "300x5-30+60"
     alignment = left
     show_age_threshold = 60
     sticky_history = yes
@@ -19,12 +19,15 @@
     startup_notification = false
     dmenu = "/usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb #94DBFF -sf #000000"
     browser = chromium-browser
+    shrink = false
     icon_position = left
+    # Paths to default icons.
+F    #icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 
 [frame]
-    width = 3
-    color = "#000000"
+    width = 1
+    color = "#333333"
 
 [shortcuts]
     #close = ctrl+space
@@ -33,19 +36,22 @@
     #context = ctrl+shift+period
 
 [urgency_low]
-    background = "#ffffff"
-    foreground = "#000000"
+    background = "#e5e5e5"
+    foreground = "#333333"
     timeout = 30
+    icon = lamp
 
 [urgency_normal]
-    background = "#94DBFF"
-    foreground = "#000000"
+    background = "#7EA8EB"
+    foreground = "#333333"
     timeout = 45
+    icon = feed
 
 [urgency_critical]
     background = "#ff9999"
-    foreground = "#000000"
+    foreground = "#333333"
     timeout = 0
+    icon = warning2
 
 
 [libpurple_signed]
