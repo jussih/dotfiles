@@ -1,0 +1,21 @@
+$include /etc/inputrc
+set colored-stats on
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set show-mode-in-prompt on
+set editing-mode vi
+$if mode=vi
+set keymap vi-command
+# these are for vi-command mode
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+TAB:menu-complete
+Control-a:menu-complete-backward
+set keymap vi-insert
+# these are for vi-insert mode
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+TAB:menu-complete
+Control-a:menu-complete-backward
+$endif
