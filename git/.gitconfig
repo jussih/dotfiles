@@ -1,6 +1,6 @@
 [user]
-	email = jussih@gmail.com
-	name = Jussi Heikkila
+	email = foo@bar.baz
+	name = Foo Bar
 
 [color]
 	ui = true
@@ -10,3 +10,5 @@
     l = log --graph --date=relative
     lstat = log --graph --date=relative --stat
     st = status
+[push]
+	default = simple
