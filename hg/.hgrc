@@ -1,5 +1,5 @@
 [ui]
-username = Jussi Heikkila <>
+username = {{ name }} <{{ email }}>
 verbose = True
 merge = meld
 

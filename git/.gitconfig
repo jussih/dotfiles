@@ -1,6 +1,6 @@
 [user]
-	email = foo@bar.baz
-	name = Foo Bar
+	email = {{ email }}
+	name = {{ name }}
 
 [color]
 	ui = true
