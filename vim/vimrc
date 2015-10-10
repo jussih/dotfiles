@@ -32,20 +32,16 @@ Plugin 'ervandew/supertab'
 Plugin 'honza/vim-snippets'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
-"Plugin 'klen/python-mode.git' // conflicts with jedi-vim
 Plugin 'lepture/vim-jinja'
 "Plugin 'ludovicchabant/vim-lawrencium'
 Plugin 'majutsushi/tagbar'
 "Plugin 'maxmeyer/vim-taskjuggler'
-"Plugin 'nanotech/jellybeans.vim'
 Plugin 'sjl/badwolf'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 "Plugin 'puppetlabs/puppet-syntax-vim'
 Plugin 'Raimondi/delimitMate'
 "Plugin 'rodjek/vim-puppet'
 "Plugin 'markcornick/vim-vagrant'
-"Plugin 'Rykka/clickable.vim'  See: https://github.com/Rykka/clickable.vim/issues/4
-"Plugin 'Rykka/riv.vim'        See: https://github.com/Rykka/riv.vim/issues/86
 Plugin 'saltstack/salt-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
@@ -90,7 +86,7 @@ set lazyredraw                  " only redraws if it is needed
 "set autoread                   " update a open file edited outside of Vim
 set ttimeoutlen=0               " toggle between modes almost instantly
 set backspace=indent,eol,start  " defines the backspace key behavior
-set virtualedit=all             " to edit where there is no actual character
+set virtualedit=block           " visual block mode can move where there is no actual character
 set splitright                  " open splits on the right side
 set splitbelow                  " open vertical splits below
 set mouse=a                     " support mouse
@@ -212,7 +208,7 @@ set undodir=$HOME/.vim/tmp/undo/
 set directory=$HOME/.vim/tmp/swap/
 set viminfo+=n$HOME/.vim/tmp/viminfo
 
-" make dirs if they do not exists
+" make dirs if they do not exist
 silent! call MakeDirIfNoExists(&undodir)
 silent! call MakeDirIfNoExists(&backupdir)
 silent! call MakeDirIfNoExists(&directory)
@@ -425,6 +421,7 @@ let g:indentLine_char = '┊'
 let g:indentLine_color_term = 239
 let g:indentLine_fileType = ['python', 'puppet', 'sls', 'html', 'js']
 nmap <F6> :IndentLinesToggle<CR>
+imap <F6> <ESC>:IndentLinesToggle<CR>i
 
 " Ag
 nmap <Leader>a :Ag!
