@@ -27,7 +27,7 @@ bin_{{ name }}:
     - user: {{ name }}
     - user: {{ name }}
     - makedirs: True
-    - mode: 0744
+    - file_mode: 0744
     
 git_{{ name }}:
   file.managed:
