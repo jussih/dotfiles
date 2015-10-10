@@ -39,4 +39,8 @@ PS1='\[\033[1;37m\][\A]\[\033[0m\] \u@\h:\w \[\033[1;37m\]\$\[\033[0m\] '
 #bind '"\e[A":history-search-backward'
 #bind '"\e[B":history-search-forward'
 
-
+if [ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ] ; then
+  export WORKON_HOME=~/virtualenvs
+  mkdir -p $WORKON_HOME
+  source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+fi
