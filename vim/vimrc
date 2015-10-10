@@ -340,6 +340,11 @@ else
     map! <ESC>[A <C-Up>
     map! <ESC>[B <C-Down>
     let g:airline_powerline_fonts=0
+    let g:airline_right_sep='<'
+    let g:airline_right_alt_sep='|'
+    let g:airline_left_sep='>'
+    let g:airline_left_alt_sep='|'
+
 endif
 
 
@@ -381,11 +386,11 @@ nnoremap <silent> <F9> :TagbarOpen fj<cr>
 
 " airline
 set noshowmode
-let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#branch#enabled = 1
 let g:airline_powerline_fonts=1
 let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#hunks#non_zero_only = 0
-"set laststatus=2
+let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline_section_z = '%l/%L' "lines / totalLines
 
 " Jedi
 let g:jedi#use_tabs_not_buffers = 0
