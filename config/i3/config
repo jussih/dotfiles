@@ -180,4 +180,4 @@ bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 25 -steps 1
 for_window [class="^Spotify$"] floating enable
 
 #exec "dropbox start"
-exec --no-startup-id "dunst -config ~/.i3/dunstrc"
+exec --no-startup-id "dunst -config ~/.config/dunst/dunstrc"

@@ -30,7 +30,15 @@ shopt -s histappend
 stty -ixon
 
 # Set prompt
-PS1='\[\033[1;37m\][\A]\[\033[0m\] \u@\h:\w \[\033[1;37m\]\$\[\033[0m\] '
+PS1='\[\033[1;37m\][\A]\[\033[0m\] \u@\h:\w\n\[\033[1;37m\]\$\[\033[0m\] '
+
+# Git prompt
+# curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+#source ~/.git-prompt.sh
+#export GIT_PS1_SHOWDIRTYSTATE=1
+#PS1='\[\033[1;37m\][\A]\[\033[0m\]\[\u@\h:\w\]$(__git_ps1 " \[(%s)\]")\n\[\033[1;37m\]\$\[\033[0m\] '
+
+
 
 # Readline settings, see .inputrc
 # make tab cycle through commands instead of listing
