@@ -7,7 +7,8 @@
 
 [alias]
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    l = log --graph --date=relative
+    l = log --branches --remotes --tags --graph --oneline --decorate
+    ll = log --branches --remotes --tags --graph --decorate
     lstat = log --graph --date=relative --stat
     st = status
 [push]
