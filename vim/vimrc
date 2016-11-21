@@ -356,9 +356,9 @@ let NERDTreeChDirMode = 2
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-noremap <c-b> :CtrlPBuffer<cr>
+let g:ctrlp_cmd = 'CtrlPBuffer'
+let g:ctrlp_working_path_mode = 'w'
+"noremap <c-b> :CtrlPBuffer<cr>
 if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
@@ -401,7 +401,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_echo_current_error = 1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_cursor_column = 1
-let g:syntastic_python_flake8_args="--ignore=E111,E501,W391"
+let g:syntastic_python_flake8_args="--ignore=E111,E121,E501,W391"
 let g:syntastic_enable_highlighting = 1
 nnoremap <F11> :w<cr>:SyntasticCheck<cr>:Errors<cr>
 inoremap <F11> <ESC>:w<cr>:SyntasticCheck<cr>:Errors<cr>
@@ -425,7 +425,7 @@ imap <F6> <ESC>:IndentLinesToggle<CR>i
 
 " Ag
 nmap <Leader>a :Ag!
-let g:agprg="ag --column --ignore=tags"
+let g:agprg="ag --column --ignore=tags -i"
 
 "
 " =========== END Plugin Settings =========="
