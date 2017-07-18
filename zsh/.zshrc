@@ -96,6 +96,15 @@ ZSH_THEME_HG_PROMPT_CLEAN="%{$fg[magenta]%})"
 export EDITOR=vim
 eval `keychain --eval id_rsa id_rsa_old`
 
+#vi mode
+bindkey -v
+bindkey '^R' history-incremental-pattern-search-backward
+bindkey -M vicmd 'k' history-beginning-search-backward-end
+bindkey -M vicmd 'j' history-beginning-search-forward-end
+bindkey '^w' backward-kill-word
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
 #export ANDROID_HOME=~/Android/Sdk
 #export PATH=${PATH}:${ANDROID_HOME}/tools
 #export PATH=${PATH}:${ANDROID_HOME}/platform-tools
