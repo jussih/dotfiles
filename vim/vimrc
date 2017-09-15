@@ -29,7 +29,7 @@ Plugin 'bling/vim-airline'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 "Plugin 'godlygeek/tabular'
-Plugin 'honza/vim-snippets'
+"Plugin 'honza/vim-snippets'
 Plugin 'kien/ctrlp.vim'
 Plugin 'rking/ag.vim'
 Plugin 'lepture/vim-jinja'
@@ -163,8 +163,9 @@ nnoremap <leader>w <ESC>:w<cr>
 nnoremap <leader><space> :noh<cr>
 
 
-nnoremap <tab> %
-vnoremap <tab> %
+"remapping tab causes CTRL-I to not work for moving forward in the jumplist
+"nnoremap <tab> %
+"vnoremap <tab> %
 
 " Toggle to disable autoindent
 set pastetoggle=<F4>
