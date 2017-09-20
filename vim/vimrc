@@ -60,6 +60,7 @@ Plugin 'othree/html5.vim'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'gregsexton/MatchTag'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'elixir-lang/vim-elixir'
 call vundle#end()
 
 filetype plugin indent on
