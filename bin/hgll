@@ -1,2 +1,2 @@
 #!/bin/sh
-hg l | less -R
+hg l $* | less -R
