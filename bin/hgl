@@ -1,2 +1,2 @@
 #!/bin/sh
-hg l -l 10
+hg l -l 10 $*
