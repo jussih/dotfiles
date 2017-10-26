@@ -257,6 +257,7 @@ set wildignore+=*.DS_Store "OSX"
 set wildignore+=*.luac "Lua byte code"
 set wildignore+=*.pyc "Python Object codes"
 set wildignore+=*.orig "Merge resolution files"
+set wildignore+=*.egg/** "Ignore files inside python egg libs"
 
 " imitate nerdtree with netrw
 let g:netrw_banner = 0
@@ -264,6 +265,7 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
+let g:netrw_list_hide='.*\.swp$,.*\.pyc$'
 "nnoremap <F3> :Vexplore<cr>
 "inoremap <F3> :Vexplore<cr>
 
