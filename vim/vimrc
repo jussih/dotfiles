@@ -64,6 +64,9 @@ Plugin 'editorconfig/editorconfig-vim'
 "Plugin 'elixir-lang/vim-elixir'
 Plugin 'w0rp/ale'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'epilande/vim-react-snippets'
 call vundle#end()
 
 filetype plugin indent on
@@ -258,6 +261,7 @@ set wildignore+=*.luac "Lua byte code"
 set wildignore+=*.pyc "Python Object codes"
 set wildignore+=*.orig "Merge resolution files"
 set wildignore+=*.egg/** "Ignore files inside python egg libs"
+set wildignore+=**/node_modules/** "NPM packages"
 
 " imitate nerdtree with netrw
 let g:netrw_banner = 0
@@ -339,6 +343,9 @@ if has("gui_running")
     set background=dark
     colorscheme solarized
     if has("gui_gtk2")
+      "https://github.com/powerline/fonts
+      set guifont=Inconsolata\ for\ Powerline\ 12
+    elseif has("gui_gtk3")
       "https://github.com/powerline/fonts
       set guifont=Inconsolata\ for\ Powerline\ 12
     elseif has("gui_macvim")
