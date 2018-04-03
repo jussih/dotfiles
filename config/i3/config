@@ -172,15 +172,21 @@ bindsym $mod+x move workspace to output right
 
 # volume control and backlight
 bindsym XF86AudioLowerVolume exec "amixer set Master 10%-"
-bindsym XF86AudioRaiseVolume exec "amixer set Master 10%+"
+bindsym XF86AudioRaiseVolume exec "amixer set Master 10%+ unmute"
+bindsym XF86AudioMute exec "amixer sset Master toggle"
 #bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume 0 0
 bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 25 -steps 1
 bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 25 -steps 1
 
+bindsym Print exec gnome-screenshot -i
+for_window [class="Gnome-screenshot"] floating enable
+for_window [class="Gcalctool"] floating enable
 for_window [class="^Spotify$"] floating enable
 
 #exec "dropbox start"
+#exec --no-startup-id "urxvtd -q -o -f"
 exec --no-startup-id "dunst -config ~/.config/dunst/dunstrc"
+#exec --no-startup-id "xclip"
 #exec --no-startup-id 'xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Finger" 30 50 105'
 #exec --no-startup-id 'xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Noise Cancellation" 20 20'
 #exec --no-startup-id "synclient HorizTwoFingerScroll=1 VertScrollDelta=-101 PalmDetect=1"

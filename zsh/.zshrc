@@ -7,7 +7,7 @@ export ZSH=/home/heikkjus/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="candy"
+ZSH_THEME="solarized"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -59,7 +59,8 @@ source $ZSH/oh-my-zsh.sh
 
 
 # User configuration
-PROMPT=$'%{$fg_bold[green]%}%n@%m %{$fg[blue]%}%D{[%H:%M:%S]} %{$reset_color%}%{$fg[white]%}[%~]%{$reset_color%} $(git_prompt_info)$(hg_prompt_info)%{$fg[blue]%}\
+#PROMPT=$'%{$fg_bold[green]%}%n@%m %{$fg[blue]%}%D{[%H:%M:%S]} %{$reset_color%}%{$fg[white]%}[%~]%{$reset_color%} $(git_prompt_info)$(hg_prompt_info)%{$fg[blue]%}\
+PROMPT=$'%{$fg_bold[cyan]%}%n@%m %{$fg[blue]%}%D{[%H:%M:%S]} %{$reset_color%}%{$fg[white]%}[%~]%{$reset_color%} $(git_prompt_info)$(hg_prompt_info)%{$fg[blue]%}\
 ->%{$fg_bold[blue]%} %#%{$reset_color%} '
 ZSH_THEME_HG_PROMPT_PREFIX="%{$fg_bold[magenta]%}hg:(%{$fg[red]%}"
 ZSH_THEME_HG_PROMPT_SUFFIX="%{$reset_color%}"
@@ -114,3 +115,23 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 ## Unset manpath so we can inherit from /etc/manpath via the `manpath` command
 #unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 #export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+# history completion with fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# SSH and attach/start tmux session automatically
+function sshtmux() {
+  if [ -n "$TMUX" ]
+  then
+    tmux rename-window $1
+  fi
+
+  ssh $1 -t -- "type tmux > /dev/null && tmux has-session -t juba && tmux -2 attach-session -t juba || tmux -2 new-session -s juba zsh || bash"
+
+  if [ -n "$TMUX" ]
+  then
+    tmux set-window-option automatic-rename "on" 1>/dev/null
+  fi
+}
+compdef sshtmux=ssh
+alias s=sshtmux
