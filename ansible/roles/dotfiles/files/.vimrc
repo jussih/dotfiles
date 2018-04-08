@@ -25,16 +25,17 @@ call vundle#begin()
 " List plugins here
 Plugin 'airblade/vim-gitgutter'
 Plugin 'gmarik/Vundle.vim.git'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'ervandew/supertab'
 "Plugin 'godlygeek/tabular'
 "Plugin 'honza/vim-snippets'
-Plugin 'kien/ctrlp.vim'
-Plugin 'rking/ag.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'mhinz/vim-grepper'
 Plugin 'lepture/vim-jinja'
 "Plugin 'ludovicchabant/vim-lawrencium'
-Plugin 'majutsushi/tagbar'
+"Plugin 'majutsushi/tagbar'
 "Plugin 'maxmeyer/vim-taskjuggler'
 Plugin 'sjl/badwolf'
 Plugin 'PotatoesMaster/i3-vim-syntax'
@@ -42,8 +43,8 @@ Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'Raimondi/delimitMate'
 "Plugin 'rodjek/vim-puppet'
 "Plugin 'markcornick/vim-vagrant'
-Plugin 'saltstack/salt-vim'
-Plugin 'scrooloose/syntastic'
+"Plugin 'saltstack/salt-vim'
+"Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
 "Plugin 'tpope/vim-commentary'
 "Plugin 'tpope/vim-fugitive'
@@ -54,12 +55,18 @@ Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
 "Plugin 'edkolev/tmuxline.vim'
-Plugin 'evanmiller/nginx-vim-syntax'
+"Plugin 'evanmiller/nginx-vim-syntax'
 "Plugin 'voikko/corevoikko', {'rtp': 'tools/vim'}
 Plugin 'othree/html5.vim'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'gregsexton/MatchTag'
 Plugin 'editorconfig/editorconfig-vim'
+"Plugin 'elixir-lang/vim-elixir'
+Plugin 'w0rp/ale'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'epilande/vim-react-snippets'
 call vundle#end()
 
 filetype plugin indent on
@@ -240,8 +247,9 @@ inoremap <home> <c-o>^
 au VimResized * :wincmd =
 
 " Wildmenu completion "
+set path+=** " Enable full recursive search
 set wildmenu
-set wildmode=list:longest
+set wildmode=full
 set wildignore+=.hg,.git,.svn " Version Controls"
 set wildignore+=*.aux,*.out,*.toc "Latex Indermediate files"
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg "Binary Imgs"
@@ -252,6 +260,18 @@ set wildignore+=*.DS_Store "OSX"
 set wildignore+=*.luac "Lua byte code"
 set wildignore+=*.pyc "Python Object codes"
 set wildignore+=*.orig "Merge resolution files"
+set wildignore+=*.egg/** "Ignore files inside python egg libs"
+set wildignore+=**/node_modules/** "NPM packages"
+
+" imitate nerdtree with netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+let g:netrw_list_hide='.*\.swp$,.*\.pyc$'
+"nnoremap <F3> :Vexplore<cr>
+"inoremap <F3> :Vexplore<cr>
 
 " Make Sure that Vim returns to the same line when we reopen a file
 augroup line_return
@@ -320,8 +340,12 @@ if has("gui_running")
     set guioptions-=m "menu disabled
     set guioptions-=t "menu disabled
     set guioptions-=g "menu disabled
-    colorscheme badwolf
+    set background=dark
+    colorscheme solarized
     if has("gui_gtk2")
+      "https://github.com/powerline/fonts
+      set guifont=Inconsolata\ for\ Powerline\ 12
+    elseif has("gui_gtk3")
       "https://github.com/powerline/fonts
       set guifont=Inconsolata\ for\ Powerline\ 12
     elseif has("gui_macvim")
@@ -330,8 +354,9 @@ if has("gui_running")
       set guifont=Consolas:h11:cANSI
     endif
 else
-    set t_Co=256
-    colorscheme badwolf
+    "set t_Co=256
+    set background=dark
+    colorscheme solarized
     "fix ctrl-arrow keys with putty
     map <ESC>[D <C-Left>
     map <ESC>[C <C-Right>
@@ -355,24 +380,28 @@ endif
 
 " ========== Plugin Settings =========="
 
-" NERDTree
-nnoremap <F3> :NERDTreeToggle<cr>
-let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
-let NERDTreeChDirMode = 2
+" ALE
+let g:ale_lint_delay = 1000
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPBuffer'
 let g:ctrlp_working_path_mode = 'w'
 "noremap <c-b> :CtrlPBuffer<cr>
+
 if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 if executable('rg')
-  " Use Rg over Ag or Grep
+  " Use Rg over Ag and Grep
   set grepprg=rg\ --nogroup\ --nocolor
 endif
+
+" NERDTree
+nnoremap <F3> :NERDTreeToggle<cr>
+let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
+let NERDTreeChDirMode = 2
 
 " SuperTab
 "let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
@@ -385,10 +414,6 @@ let g:SuperTabDefaultCompletionType = "context"
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 
-" Tagbar
-nnoremap <silent> <F10> :TagbarToggle<cr>
-nnoremap <silent> <F9> :TagbarOpen fj<cr>
-
 " airline
 set noshowmode
 let g:airline#extensions#branch#enabled = 1
@@ -396,6 +421,7 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline_section_z = '%l/%L' "lines / totalLines
+let g:airline#extensions#ale#enabled = 1
 
 " Jedi
 let g:jedi#use_tabs_not_buffers = 0
@@ -403,17 +429,17 @@ let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#show_call_signatures = 0 "sometimes buggy
 let g:jedi#popup_on_dot = 0
 
-" Syntastic 
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_echo_current_error = 1
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_cursor_column = 1
-let g:syntastic_python_flake8_args="--ignore=E111,E121,E501,W391"
-let g:syntastic_enable_highlighting = 1
-nnoremap <F11> :w<cr>:SyntasticCheck<cr>:Errors<cr>
-inoremap <F11> <ESC>:w<cr>:SyntasticCheck<cr>:Errors<cr>
+"" Syntastic 
+"let g:syntastic_python_checkers = ['flake8']
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_echo_current_error = 1
+"let g:syntastic_aggregate_errors = 1
+"let g:syntastic_cursor_column = 1
+"let g:syntastic_python_flake8_args="--ignore=E111,E121,E501,W391"
+"let g:syntastic_enable_highlighting = 1
+"nnoremap <F11> :w<cr>:SyntasticCheck<cr>:Errors<cr>
+"inoremap <F11> <ESC>:w<cr>:SyntasticCheck<cr>:Errors<cr>
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -432,13 +458,13 @@ let g:indentLine_fileType = ['python', 'puppet', 'sls', 'html', 'js']
 nmap <F6> :IndentLinesToggle<CR>
 imap <F6> <ESC>:IndentLinesToggle<CR>i
 
-" Ag
-nmap <Leader>a :Ag!
-let g:agprg="ag --column --ignore=tags -i"
+" vim-grepper 
+nmap <Leader>a :Grepper<cr>
 
 "
 " =========== END Plugin Settings =========="
 "
+
 
 """ Local Specific Configuration
 " Use local vimrc if available
