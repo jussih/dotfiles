@@ -1,15 +1,13 @@
 ---
 
-- name: run the playbook tasks on the localhost
+- name: Install configuration files
   hosts: localhost
   become: no
   vars:
     user_name: Jussi Heikkilä
     user_email: jussih@gmail.com
     username: juba
-  tasks:
-  - name: print out the hostname of target
-    command: hostname
   roles:
     - dotfiles
     - guifiles
+    - devtools

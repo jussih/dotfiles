@@ -356,7 +356,7 @@ if has("gui_running")
 else
     "set t_Co=256
     set background=dark
-    colorscheme solarized
+    colorscheme badwolf
     "fix ctrl-arrow keys with putty
     map <ESC>[D <C-Left>
     map <ESC>[C <C-Right>

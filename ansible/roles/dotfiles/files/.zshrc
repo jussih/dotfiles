@@ -2,7 +2,7 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/heikkjus/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -95,7 +95,7 @@ ZSH_THEME_HG_PROMPT_CLEAN="%{$fg[magenta]%})"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 export EDITOR=vim
-eval `keychain --eval id_rsa id_rsa_old`
+eval `keychain --eval id_rsa`
 
 #vi mode
 bindkey -v
@@ -103,8 +103,8 @@ bindkey '^R' history-incremental-pattern-search-backward
 bindkey -M vicmd 'k' history-beginning-search-backward-end
 bindkey -M vicmd 'j' history-beginning-search-forward-end
 bindkey '^w' backward-kill-word
-bindkey "^[[A" up-line-or-beginning-search # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
+bindkey '^[[A' up-line-or-beginning-search # Up
+bindkey '^[[B' down-line-or-beginning-search # Down
 
 #export ANDROID_HOME=~/Android/Sdk
 #export PATH=${PATH}:${ANDROID_HOME}/tools
@@ -121,7 +121,7 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 # use ripgrep for faster listings
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-bindkey -s "^p" "vim $(fzf)\n"
+bindkey -s '^p' 'vim $(fzf)\n'
 
 # SSH and attach/start tmux session automatically
 function sshtmux() {
@@ -139,3 +139,6 @@ function sshtmux() {
 }
 compdef sshtmux=ssh
 alias s=sshtmux
+
+# source local box-specific zsh settings
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

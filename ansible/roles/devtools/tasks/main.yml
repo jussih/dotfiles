@@ -1,5 +1,7 @@
 ---
 - name: Add Vim PPA
+  become: yes
+  become_method: sudo
   apt_repository:
     repo: ppa:jonathonf/vim
 
@@ -29,9 +31,15 @@
     #- pipenv?
 
 - name: Change shell to ZSH
-  user: shell=/bin/zsh name={{ username }}
+  become: yes
+  user: shell=/bin/zsh name={{ ansible_user_id }}
+
+- name: Clone oh-my-zsh repo
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~/.oh-my-zsh
 
 - name: Install Ripgrep from Github release
+  become: yes
+  become_method: sudo
   apt:
     deb: https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb
 
