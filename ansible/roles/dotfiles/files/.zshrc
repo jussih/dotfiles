@@ -118,6 +118,10 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 # history completion with fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# use ripgrep for faster listings
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+bindkey -s "^p" "vim $(fzf)\n"
 
 # SSH and attach/start tmux session automatically
 function sshtmux() {

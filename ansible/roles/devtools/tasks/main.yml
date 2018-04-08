@@ -1,4 +1,8 @@
 ---
+- name: Add Vim PPA
+  apt_repository:
+    repo: ppa:jonathonf/vim
+
 - name: Update packages
   become: yes
   become_method: sudo
@@ -12,6 +16,7 @@
     - curl
     - git
     - htop
+    - keychain
     - mercurial
     - nmap
     - python-pip
@@ -22,7 +27,23 @@
     - wget
     - zsh
     #- pipenv?
-    #- vim8!!!
 
 - name: Change shell to ZSH
   user: shell=/bin/zsh name={{ username }}
+
+- name: Install Ripgrep from Github release
+  apt:
+    deb: https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb
+
+# If proper packaging is ever available, use that instead of blindly running scripts from the internets https://github.com/junegunn/fzf/issues/1094
+- name: Clone FZF from Github
+  git:
+    repo: 'https://github.com/junegunn/fzf.git'
+    dest:  ~/.fzf
+    depth: 1
+
+- name: Install FZF
+  command: ~/.fzf/install --all
+  
+
+    

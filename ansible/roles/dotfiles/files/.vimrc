@@ -369,7 +369,10 @@ if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
 endif
-
+if executable('rg')
+  " Use Rg over Ag or Grep
+  set grepprg=rg\ --nogroup\ --nocolor
+endif
 
 " SuperTab
 "let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
@@ -436,3 +439,9 @@ let g:agprg="ag --column --ignore=tags -i"
 "
 " =========== END Plugin Settings =========="
 "
+
+""" Local Specific Configuration
+" Use local vimrc if available
+if filereadable(expand("\~/.vimrc.local"))
+  source \~/.vimrc.local
+endif
