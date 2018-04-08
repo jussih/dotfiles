@@ -18,6 +18,7 @@
   with_items:
     - .ackrc
     - .bashrc
+    - .dircolors
     - .eslintrc.json
     - .inputrc
     - .pylintrc
