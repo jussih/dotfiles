@@ -1,0 +1,28 @@
+---
+- name: Update packages
+  become: yes
+  become_method: sudo
+  apt: upgrade=dist update_cache=yes
+
+- name: Install development tools
+  apt: name={{ item }} state=latest
+  become: yes
+  become_method: sudo
+  with_items:
+    - curl
+    - git
+    - htop
+    - mercurial
+    - nmap
+    - python-pip
+    - silversearcher-ag
+    - tmux
+    - vim
+    - virtualenvwrapper
+    - wget
+    - zsh
+    #- pipenv?
+    #- vim8!!!
+
+- name: Change shell to ZSH
+  user: shell=/bin/zsh name={{ username }}

@@ -1,6 +1,6 @@
 [user]
-	email = {{ email }}
-	name = {{ name }}
+	email = {{ user_email }}
+	name = {{ user_name }}
 
 [color]
 	ui = true

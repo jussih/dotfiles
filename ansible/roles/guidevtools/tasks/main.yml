@@ -1,0 +1,19 @@
+---
+- name: Update packages
+  become: yes
+  become_method: sudo
+  apt: upgrade=dist update_cache=yes
+
+- name: Install GUI applications
+  apt: name={{ item }} state=latest
+  become: yes
+  become_method: sudo
+  with_items:
+    - dunst
+    - i3
+    - meld
+    - rxvt-unicode-256color
+    - vim-gtk3
+
+# keepassxc?
+# zeal?

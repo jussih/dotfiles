@@ -1,5 +1,5 @@
 [ui]
-username = {{ name }} <{{ email }}>
+username = {{ user_name }} <{{ user_email }}>
 verbose = True
 merge = meld
 

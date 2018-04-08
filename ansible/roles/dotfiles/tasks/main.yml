@@ -1,0 +1,40 @@
+---
+- name: Install Git config
+  template:
+    src=.gitconfig
+    dest=~/.gitconfig
+    backup=yes
+- name: Install Mercurial config
+  template:
+    src=.hgrc
+    dest=~/.hgrc
+    backup=yes
+
+- name: Copy dotfiles
+  copy: 
+    src={{ item }}
+    dest=~/{{ item }}
+    backup=yes
+  with_items:
+    - .ackrc
+    - .bashrc
+    - .eslintrc.json
+    - .inputrc
+    - .pylintrc
+    - .vimrc
+    - .zshrc
+
+- name: Copy CLI config directory
+  copy:
+    src=.config
+    dest=~/
+
+- name: Copy .vim directory
+  copy:
+    src=.vim
+    dest=~/
+
+- name: Copy bin scripts
+  copy:
+    src=bin
+    dest=~/
