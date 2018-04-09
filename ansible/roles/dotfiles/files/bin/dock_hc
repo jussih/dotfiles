@@ -1,0 +1,8 @@
+#!/bin/bash
+port="8000"
+if (( "$#" == "1" )); then
+    port=$1
+fi
+echo $port
+docker run --rm -ti -p $port:8000 -v $(dirname $SSH_AUTH_SOCK):$(dirname $SSH_AUTH_SOCK) -e SSH_AUTH_SOCK=$SSH_AUTH_SOCK -v $HOME/bin:/home/bew/bin -v $(pwd):/home/bew/bew docker.haltu.net/haltu/env/heliconia:develop /bin/zsh
+

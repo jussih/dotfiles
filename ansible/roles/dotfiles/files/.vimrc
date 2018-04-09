@@ -32,6 +32,7 @@ Plugin 'ervandew/supertab'
 "Plugin 'godlygeek/tabular'
 "Plugin 'honza/vim-snippets'
 Plugin 'ctrlpvim/ctrlp.vim'
+let g:grepper = {}
 Plugin 'mhinz/vim-grepper'
 Plugin 'lepture/vim-jinja'
 "Plugin 'ludovicchabant/vim-lawrencium'
@@ -382,6 +383,7 @@ endif
 
 " ALE
 let g:ale_lint_delay = 1000
+let g:ale_linters = {'python': ['pylint']}
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
@@ -460,6 +462,12 @@ imap <F6> <ESC>:IndentLinesToggle<CR>i
 
 " vim-grepper 
 nmap <Leader>a :Grepper<cr>
+"let g:grepper.ag.grepprg = "ag --ignore eggs/ --ignore coverage/ --ignore staticroot/ -U"
+let g:grepper.ag = {
+    \ 'grepprg':    'ag --ignore eggs/ --ignore coverage/ --ignore staticroot/ -U -i',
+    \ 'grepformat': '%f:%l:%m',
+    \ 'escape':     '\^$.*[]',
+    \ }
 
 "
 " =========== END Plugin Settings =========="

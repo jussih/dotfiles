@@ -93,6 +93,8 @@ ZSH_THEME_HG_PROMPT_CLEAN="%{$fg[magenta]%})"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias gag="ag --ignore eggs/ --ignore coverage/ --ignore staticroot/ -U -i"
 #
 export EDITOR=vim
 eval `keychain --eval id_rsa`
