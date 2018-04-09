@@ -462,9 +462,14 @@ imap <F6> <ESC>:IndentLinesToggle<CR>i
 
 " vim-grepper 
 nmap <Leader>a :Grepper<cr>
-"let g:grepper.ag.grepprg = "ag --ignore eggs/ --ignore coverage/ --ignore staticroot/ -U"
+let g:grepper.tools = ['rg', 'ag', 'ack', 'git', 'grep']
 let g:grepper.ag = {
     \ 'grepprg':    'ag --ignore eggs/ --ignore coverage/ --ignore staticroot/ -U -i',
+    \ 'grepformat': '%f:%l:%m',
+    \ 'escape':     '\^$.*[]',
+    \ }
+let g:grepper.rg = {
+    \ 'grepprg':    'rg -g "!{eggs,coverage,staticroot}/*" -g "!{.git,.hg,.node-modules}/*" --no-ignore --vimgrep',
     \ 'grepformat': '%f:%l:%m',
     \ 'escape':     '\^$.*[]',
     \ }
