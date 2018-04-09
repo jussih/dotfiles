@@ -95,6 +95,8 @@ ZSH_THEME_HG_PROMPT_CLEAN="%{$fg[magenta]%})"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias gag="ag --ignore eggs/ --ignore coverage/ --ignore staticroot/ -U -i"
+alias rg="rg -S"
+alias rag="rg -g \!eggs/ -g \!coverage/ -g \!staticroot/ --no-ignore"
 #
 export EDITOR=vim
 eval `keychain --eval id_rsa`
@@ -121,7 +123,7 @@ bindkey '^[[B' down-line-or-beginning-search # Down
 # history completion with fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # use ripgrep for faster listings
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,.hg,node_modules}/*" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 bindkey -s '^p' 'vim $(fzf)\n'
 
