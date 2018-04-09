@@ -1,0 +1,11 @@
+---
+
+- name: Install GUI tools
+  hosts: localhost
+  become: no
+  vars:
+    user_name: Jussi Heikkilä
+    user_email: jussih@gmail.com
+    username: juba
+  roles:
+    - guidevtools

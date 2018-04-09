@@ -1,8 +1,8 @@
 
-URxvt.font: xft:Ubuntu Mono-12
-URxvt.boldFont: xft:Ubuntu Mono-12:bold
-URxvt.italicFont: xft:Ubuntu Mono-12:italic
-URxvt.boldItalicFont: xft:Ubuntu Mono-12:italic:bold
+URxvt.font: xft:Source Code Variable-12
+URxvt.boldFont: xft:Source Code Variable-12:bold
+URxvt.italicFont: xft:Source Code Variable-12:italic
+URxvt.boldItalicFont: xft:Source Code Variable-12:italic:bold
 !URxvt.letterSpace: -1
 
 URxvt.scrollstyle: plain

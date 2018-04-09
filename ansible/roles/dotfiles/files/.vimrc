@@ -345,10 +345,10 @@ if has("gui_running")
     colorscheme solarized
     if has("gui_gtk2")
       "https://github.com/powerline/fonts
-      set guifont=Inconsolata\ for\ Powerline\ 12
+      set guifont=Source\ Code\ Variable\ 12
     elseif has("gui_gtk3")
       "https://github.com/powerline/fonts
-      set guifont=Inconsolata\ for\ Powerline\ 12
+      set guifont=Source\ Code\ Variable\ 12
     elseif has("gui_macvim")
       set guifont=Menlo\ Regular:h14
     elseif has("gui_win32")
