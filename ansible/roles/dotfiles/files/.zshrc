@@ -144,6 +144,18 @@ function sshtmux() {
 compdef sshtmux=ssh
 alias s=sshtmux
 
+function vimgrep() {
+  local file
+
+  file="$(rg -S --no-heading -n --hidden -g \!"{.git,.hg,node_modules}" $@ | fzf -0 -1 | awk -F: '{print $1 " +" $2}')"
+
+  if [[ -n $file ]]
+  then
+     vim ${=file}
+  fi
+}
+alias vg=vimgrep
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
