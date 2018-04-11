@@ -6,10 +6,10 @@
     repo: ppa:jonathonf/vim
   when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version < "18")
 
-- name: Update packages
+- name: Update apt cache
   become: yes
   become_method: sudo
-  apt: upgrade=dist update_cache=yes
+  apt: update_cache=yes
 
 - name: Install development tools
   apt: name={{ item }} state=latest
