@@ -42,6 +42,11 @@
 - name: Update fonts cache
   command: fc-cache -f "~/.local/share/fonts"
 
+- name: Install Inconsolata font
+  apt: name=fonts-inconsolata state=latest
+  become: yes
+  become_method: sudo
+
 - name: Install Powerline patched fonts
   apt: name=fonts-powerline state=latest
   become: yes
@@ -51,4 +56,4 @@
 # keepassxc?
 # zeal?
 # rofi?
-# powerline fonts
+

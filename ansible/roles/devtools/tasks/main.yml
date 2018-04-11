@@ -4,6 +4,7 @@
   become_method: sudo
   apt_repository:
     repo: ppa:jonathonf/vim
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version < "18")
 
 - name: Update packages
   become: yes
@@ -20,6 +21,7 @@
     - htop
     - keychain
     - mercurial
+    - net-tools
     - nmap
     - python-pip
     - silversearcher-ag
