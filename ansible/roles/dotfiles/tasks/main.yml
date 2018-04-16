@@ -22,6 +22,7 @@
     - .eslintrc.json
     - .inputrc
     - .pylintrc
+    - .tmux.conf
     - .vimrc
     - .zshrc
 
