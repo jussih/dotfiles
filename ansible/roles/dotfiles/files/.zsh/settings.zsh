@@ -13,6 +13,7 @@ zstyle ':completion:*' rehash true  # When new programs is installed, auto updat
 zstyle ':completion:*' use-cache on  # Enable completion caching
 zstyle ':completion:*' cache-path $HOME/.zsh/cache/
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'  # case insensitive completion
 setopt completealiases  # Prevent aliases from being substituted before completion is attempted.
 setopt menu_complete  # Instead of listing possibilities, select the first match immediately.
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'  # SSH completion
