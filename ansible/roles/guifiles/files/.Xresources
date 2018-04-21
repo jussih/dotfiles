@@ -43,7 +43,7 @@ URxvt.keysym.KP_End:  \033[8~
 !
 ! http://ethanschoonover.com/solarized
 
-! color names with #define removed, GDM uses -nocpp parameter in it's call to
+! color names with #define removed, GDM uses -nocpp parameter in its call to
 ! xrdb -merge ~/.Xresources so #defines will not work.
 
 URxvt*background:              #002b36

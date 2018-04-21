@@ -3,7 +3,7 @@
 
 include "/home/juba/.gtkrc-2.0.mine"
 gtk-theme-name="Adwaita"
-gtk-icon-theme-name="Humanity"
+gtk-icon-theme-name="Paper"
 gtk-font-name="Source Sans Variable 12"
 gtk-cursor-theme-name="DMZ-White"
 gtk-cursor-theme-size=0
