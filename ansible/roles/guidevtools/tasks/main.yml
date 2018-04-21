@@ -14,6 +14,7 @@
     - meld
     - rxvt-unicode-256color
     - vim-gtk3
+    - xclip
 
 - name: Download Source Sans Pro font
   get_url:
@@ -51,7 +52,7 @@
   apt: name=fonts-powerline state=latest
   become: yes
   become_method: sudo
-    
+
 
 # keepassxc?
 # zeal?
