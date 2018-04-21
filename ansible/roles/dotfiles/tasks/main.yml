@@ -26,6 +26,11 @@
     - .vimrc
     - .zshrc
 
+- name: Copy ZSH config directory
+  copy:
+    src=.zsh
+    dest=~/
+
 - name: Copy SSH config template if config does not exist
   copy: 
     src=.ssh/
