@@ -4,11 +4,14 @@
     src=.gitconfig
     dest=~/.gitconfig
     backup=yes
+    force=no
+
 - name: Install Mercurial config
   template:
     src=.hgrc
     dest=~/.hgrc
     backup=yes
+    force=no
 
 - name: Copy dotfiles
   copy: 
@@ -32,7 +35,7 @@
     dest=~/
 
 - name: Copy SSH config template if config does not exist
-  copy: 
+  copy:
     src=.ssh/
     dest=~/.ssh/
     force=no

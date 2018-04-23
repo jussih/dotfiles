@@ -10,6 +10,7 @@
   become_method: sudo
   with_items:
     - dunst
+    - gnome-themes-standard  # adwaita for gtk2
     - i3
     - meld
     - rxvt-unicode-256color

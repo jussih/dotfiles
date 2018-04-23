@@ -22,7 +22,7 @@
     shrink = false
     icon_position = left
     # Paths to default icons.
-F    #icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_folders = ~/.local/share/icons/Paper/16x16/status/:~/.local/share/icons/Paper/16x16/devices/
 
 
 [frame]
