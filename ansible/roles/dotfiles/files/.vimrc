@@ -469,7 +469,7 @@ let g:grepper.ag = {
     \ 'escape':     '\^$.*[]',
     \ }
 let g:grepper.rg = {
-    \ 'grepprg':    'rg -g "!{eggs,coverage,staticroot}/*" -g "!{.git,.hg,.node-modules}/*" --no-ignore --vimgrep',
+    \ 'grepprg':    'rg -g "!{eggs,coverage,staticroot}/*" -g "!{.git,.hg,.node-modules}/*" --no-ignore --vimgrep -S',
     \ 'grepformat': '%f:%l:%m',
     \ 'escape':     '\^$.*[]',
     \ }
