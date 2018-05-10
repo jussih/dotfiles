@@ -17,28 +17,31 @@
     - vim-gtk3
     - xclip
 
+- name: Create font directory
+  file: path=~/.local/share/fonts/ state=directory
+
 - name: Download Source Sans Pro font
   get_url:
     url: https://github.com/adobe-fonts/source-sans-pro/releases/download/variable-fonts/SourceSansVariable-Roman.otf
-    dest: ~/.local/share/fonts
+    dest: ~/.local/share/fonts/
     mode: 0644
 
 - name: Download Source Sans Pro italic font
   get_url:
     url: https://github.com/adobe-fonts/source-sans-pro/releases/download/variable-fonts/SourceSansVariable-Italic.otf
-    dest: ~/.local/share/fonts
+    dest: ~/.local/share/fonts/
     mode: 0644
 
 - name: Download Source Code Pro font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Roman.otf
-    dest: ~/.local/share/fonts
+    dest: ~/.local/share/fonts/
     mode: 0644
 
 - name: Download Source Code Pro italic font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Italic.otf
-    dest: ~/.local/share/fonts
+    dest: ~/.local/share/fonts/
     mode: 0644
 
 - name: Update fonts cache
