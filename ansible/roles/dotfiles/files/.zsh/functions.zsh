@@ -5,7 +5,7 @@ function sshtmux() {
   then
     tmux rename-window $1
   fi
-  ssh $1 -t -- "type tmux > /dev/null && tmux has-session -t juba && tmux -2 attach-session -t juba || tmux -2 new-session -s juba zsh || bash"
+  ssh $* -t -- "type tmux > /dev/null && tmux has-session -t juba && tmux -2 attach-session -t juba || tmux -2 new-session -s juba zsh || bash"
   if [ -n "$TMUX" ]
   then
     tmux set-window-option automatic-rename "on" 1>/dev/null
@@ -35,3 +35,21 @@ function fzfedit() {
      $EDITOR ${=file}
   fi
 }
+
+# Tail logs with colorization
+function tail_log() {
+  tail -f $*|ccze
+}
+
+# Set window title
+function set-title() {
+  TITLE="\e]2;$*\a"
+  echo -e ${TITLE}
+}
+
+# Change into code project dir using fzf
+function c () {
+  CD_PATH=`find ~/code -maxdepth 3 -type d -regextype egrep -regex ".*/\.(git|hg)" -print |fzf -q $1`
+  cd $CD_PATH:h
+}
+

@@ -16,6 +16,7 @@
   become: yes
   become_method: sudo
   with_items:
+    - ccze
     - curl
     - git
     - htop
