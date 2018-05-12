@@ -6,5 +6,5 @@
   - `sudo apt-get update`
   - `sudo apt-get install ansible`
 
-- To install dotfiles and CLI tools: `ansible-playbook -i ansible/hosts -K ansible/playbook.yml`
-- To install GUI apps: `ansible-playbook -i ansible/hosts -K ansible/playbook_gui.yml`
+- To install dotfiles and CLI tools: `ansible-playbook -i hosts -K playbook.yml`
+- To install GUI apps: `ansible-playbook -i hosts -K playbook_gui.yml`
