@@ -1,6 +1,6 @@
 ---
 
-- name: Install configuration files
+- name: Install configuration files and CLI tools
   hosts: localhost
   become: no
   vars:
@@ -9,5 +9,4 @@
     username: juba
   roles:
     - dotfiles
-    - guifiles
     - devtools

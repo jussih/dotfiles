@@ -8,4 +8,5 @@
     user_email: jussih@gmail.com
     username: juba
   roles:
+    - guifiles
     - guidevtools
