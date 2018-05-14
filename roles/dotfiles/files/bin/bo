@@ -3,7 +3,7 @@
 my_settings="jussi_settings.py"
 my_config="juba.cfg"
 logging_helpers="logging_helpers.py"
-conf_path="/home/jussi/"
+conf_path="~/"
 
 if [ -f "buildout.cfg" ]
   then
