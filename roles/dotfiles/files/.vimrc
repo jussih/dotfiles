@@ -397,7 +397,9 @@ if executable('ag')
 endif
 if executable('rg')
   " Use Rg over Ag and Grep
-  set grepprg=rg\ --nogroup\ --nocolor
+  set grepprg=rg\ --no-heading\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
 endif
 
 " NERDTree
