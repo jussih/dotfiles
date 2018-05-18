@@ -49,7 +49,7 @@ function set-title() {
 
 # Change into code project dir using fzf
 function c () {
-  CD_PATH=`find ~/code -maxdepth 3 -type d -regextype egrep -regex ".*/\.(git|hg)" -print |fzf -q $1`
+  CD_PATH=`find ~/code -maxdepth 3 -type d -regextype egrep -regex ".*/\.(git|hg)" -print |fzf -1 -q $1`
   cd $CD_PATH:h
 }
 
