@@ -1,0 +1,38 @@
+extends python
+
+snippet enc "Encoding string" b
+
+# -*- coding: utf-8 -*-
+$0
+endsnippet
+
+snippet vimline "Vim modeline" b
+# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
+$0
+endsnippet
+
+snippet sup "Python super call" b
+super($1, self).$2(${3:*args, **kwargs})
+endsnippet
+
+snippet trace "Python debugger breakpoint" b
+import pdb; pdb.set_trace()
+endsnippet
+
+snippet LOG "logger" b
+LOG = logging.getLogger(__name__)
+endsnippet
+
+snippet lic "Haltu license" b
+# -*- coding: utf-8 -*-
+#
+# Copyright Haltu Oy, info@haltu.fi
+# All rights reserved.
+#
+
+endsnippet
+
+snippet exc "Print stack trace" b
+import traceback; traceback.print_exc()
+endsnippet
+

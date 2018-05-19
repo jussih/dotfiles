@@ -1,0 +1,8 @@
+#!/bin/sh
+port="8000"
+if [ $# -eq 1 ]
+  then
+    port=$1
+fi
+echo $port
+./bin/django runserver 0.0.0.0:$port

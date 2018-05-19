@@ -1,3 +1,0 @@
-#!/bin/bash
-time $*
-notify-send -i /home/jussi/.i3/thumbs.png "Execution finished" "$*"

@@ -1,0 +1,56 @@
+---
+- name: Add Vim PPA
+  become: yes
+  become_method: sudo
+  apt_repository:
+    repo: ppa:jonathonf/vim
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version < "18")
+
+- name: Update apt cache
+  become: yes
+  become_method: sudo
+  apt: update_cache=yes
+
+- name: Install development tools
+  apt: name={{ item }} state=latest
+  become: yes
+  become_method: sudo
+  with_items:
+    - ccze
+    - curl
+    - git
+    - htop
+    - keychain
+    - mercurial
+    - net-tools
+    - nmap
+    - python-pip
+    - silversearcher-ag
+    - tmux
+    - vim
+    - virtualenvwrapper
+    - wget
+    - zsh
+    #- pipenv?
+
+- name: Change shell to ZSH
+  become: yes
+  user: shell=/bin/zsh name={{ ansible_user_id }}
+
+- name: Install Ripgrep from Github release
+  become: yes
+  become_method: sudo
+  apt:
+    deb: https://github.com/BurntSushi/ripgrep/releases/download/{{ RG_VERSION }}/ripgrep_{{ RG_VERSION }}_amd64.deb
+
+- name: Clone FZF from Github
+  git:
+    repo: 'https://github.com/junegunn/fzf.git'
+    dest:  ~/.fzf
+    version: '{{ FZF_VERSION }}'
+
+- name: Download FZF Ubuntu binary
+  unarchive:
+    src: https://github.com/junegunn/fzf-bin/releases/download/{{ FZF_VERSION }}/fzf-{{ FZF_VERSION }}-linux_amd64.tgz
+    dest: ~/bin/
+    remote_src: yes

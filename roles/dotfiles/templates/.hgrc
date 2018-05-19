@@ -1,0 +1,23 @@
+[ui]
+username = {{ user_name }} <{{ user_email }}>
+verbose = True
+merge = meld
+
+[extensions]
+purge =
+hgext.extdiff =
+rebase =
+shelve =
+graphlog =
+
+[extdiff]
+cmd.meld = meld
+
+[merge-tools]
+meld.args = $base $local $other
+
+[alias]
+l = log -G --template '\x1B[33m{rev}:{node|short} \x1B[36m{author|user} \x1B[35m{tags} \x1B[32m{bookmarks} \x1B[0m{desc|firstline}\n'
+new = l -r "last(tag()):tip"
+push = push --rev .
+

@@ -1,0 +1,67 @@
+---
+- name: Update package cache
+  become: yes
+  become_method: sudo
+  apt: update_cache=yes
+
+- name: Install GUI applications
+  apt: name={{ item }} state=latest
+  become: yes
+  become_method: sudo
+  with_items:
+    - dunst
+    - gnome-themes-standard  # adwaita for gtk2
+    - i3
+    - meld
+    - rxvt-unicode-256color
+    - vim-gtk3
+    - xclip
+
+- name: Create font directory
+  file: path=~/.local/share/fonts/ state=directory
+
+- name: Create temp dir for Source Sans Pro download
+  file: path=~/temp/source-sans-pro/ state=directory
+
+- name: Download Source Sans Pro font
+  unarchive:
+    src: https://github.com/adobe-fonts/source-sans-pro/archive/2.020R-ro/1.075R-it.tar.gz
+    dest: ~/temp/source-sans-pro/
+    remote_src: yes
+    creates: ~/temp/source-sans-pro/source-sans-pro-2.020R-ro-1.075R-it/
+
+- name: Copy Source Sans Pro font in place
+  copy:
+    src: ~/temp/source-sans-pro/source-sans-pro-2.020R-ro-1.075R-it/OTF/
+    dest: ~/.local/share/fonts/
+    mode: 0644
+
+- name: Update fonts cache
+  command: fc-cache -f "~/.local/share/fonts"
+
+- name: Install Inconsolata font
+  apt: name=fonts-inconsolata state=latest
+  become: yes
+  become_method: sudo
+
+- name: Install Powerline patched fonts
+  apt: name=fonts-powerline state=latest
+  become: yes
+  become_method: sudo
+
+- name: Clone Paper Icon Theme repository
+  git:
+    repo: 'https://github.com/snwh/paper-icon-theme.git'
+    dest: '~/temp/paper-icon-theme'
+    depth: 1
+
+- name: Copy Paper Icon Theme in place
+  synchronize:
+    src:  '~/temp/paper-icon-theme/Paper'
+    dest: '~/.local/share/icons/'
+  delegate_to: "{{ inventory_hostname }}"
+
+# keepassxc?
+# zeal?
+# rofi?
+

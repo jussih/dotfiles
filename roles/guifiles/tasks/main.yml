@@ -1,0 +1,19 @@
+---
+- name: Copy config directory
+  copy:
+    src=.config
+    dest=~/
+
+- name: Copy GUI dotfiles
+  copy:
+    src={{ item }}
+    dest=~/{{ item }}
+    backup=yes
+  with_items:
+    - .gtkrc-2.0
+    - .Xresources
+
+- name: Assemble i3wm config
+  assemble:
+    src: ~/.config/i3/conf.d
+    dest: ~/.config/i3/config
