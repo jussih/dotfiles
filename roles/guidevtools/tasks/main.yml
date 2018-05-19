@@ -20,27 +20,19 @@
 - name: Create font directory
   file: path=~/.local/share/fonts/ state=directory
 
+- name: Create temp dir for Source Sans Pro download
+  file: path=~/temp/source-sans-pro/ state=directory
+
 - name: Download Source Sans Pro font
-  get_url:
-    url: https://github.com/adobe-fonts/source-sans-pro/releases/download/variable-fonts/SourceSansVariable-Roman.otf
-    dest: ~/.local/share/fonts/
-    mode: 0644
+  unarchive:
+    src: https://github.com/adobe-fonts/source-sans-pro/archive/2.020R-ro/1.075R-it.tar.gz
+    dest: ~/temp/source-sans-pro/
+    remote_src: yes
+    creates: ~/temp/source-sans-pro/source-sans-pro-2.020R-ro-1.075R-it/
 
-- name: Download Source Sans Pro italic font
-  get_url:
-    url: https://github.com/adobe-fonts/source-sans-pro/releases/download/variable-fonts/SourceSansVariable-Italic.otf
-    dest: ~/.local/share/fonts/
-    mode: 0644
-
-- name: Download Source Code Pro font
-  get_url:
-    url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Roman.otf
-    dest: ~/.local/share/fonts/
-    mode: 0644
-
-- name: Download Source Code Pro italic font
-  get_url:
-    url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Italic.otf
+- name: Copy Source Sans Pro font in place
+  copy:
+    src: ~/temp/source-sans-pro/source-sans-pro-2.020R-ro-1.075R-it/OTF/
     dest: ~/.local/share/fonts/
     mode: 0644
 
