@@ -9,8 +9,8 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = "ansible/playbook.yml"
-    ansible.inventory_path = "ansible/hosts"
+    ansible.playbook = "playbook.yml"
+    ansible.inventory_path = "hosts"
     ansible.limit = "localhost"
   end
 end
