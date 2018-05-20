@@ -191,6 +191,7 @@ exec --no-startup-id "dunst -config ~/.config/dunst/dunstrc"
 #exec --no-startup-id 'xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Finger" 30 50 105'
 #exec --no-startup-id 'xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Noise Cancellation" 20 20'
 #exec --no-startup-id "synclient HorizTwoFingerScroll=1 VertScrollDelta=-101 PalmDetect=1"
+#exec --no-startup-id 'xinput --set-prop "Razer Razer DeathAdder" "libinput Accel Speed" -1'
 #exec --no-startup-id "nm-applet"
 #exec --no-startup-id "blueman-applet"
 #exec --no-startup-id "pasystray"

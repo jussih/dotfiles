@@ -53,3 +53,7 @@ function c () {
   cd $CD_PATH:h
 }
 
+# Compose i3wm config from conf.d files
+function i3-config-build () {
+  cat ~/.config/i3/conf.d/* > ~/.config/i3/config
+}
