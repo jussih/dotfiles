@@ -27,6 +27,7 @@
     - python-pip
     - silversearcher-ag
     - tmux
+    - tree
     - vim
     - virtualenvwrapper
     - wget
