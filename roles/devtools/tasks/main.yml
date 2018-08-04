@@ -24,6 +24,10 @@
     - mercurial
     - net-tools
     - nmap
+    - pycodestyle
+    - pylint
+    - pylint3
+    - python-flake8
     - python-pip
     - silversearcher-ag
     - tmux

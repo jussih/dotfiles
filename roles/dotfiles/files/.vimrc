@@ -383,7 +383,7 @@ endif
 
 " ALE
 let g:ale_lint_delay = 1000
-let g:ale_linters = {'python': ['pylint']}
+let g:ale_linters = {'python': ['flake8', 'pylint']}
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
