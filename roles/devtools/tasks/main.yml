@@ -12,31 +12,38 @@
   apt: update_cache=yes
 
 - name: Install development tools
-  apt: name={{ item }} state=latest
+  apt:
+    name: "{{ packages }}"
+    state: latest
   become: yes
   become_method: sudo
-  with_items:
-    - ccze
-    - curl
-    - git
-    - htop
-    - keychain
-    - mercurial
-    - net-tools
-    - nmap
-    - pycodestyle
-    - pylint
-    - pylint3
-    - python-flake8
-    - python-pip
-    - silversearcher-ag
-    - tmux
-    - tree
-    - vim
-    - virtualenvwrapper
-    - wget
-    - zsh
-    #- pipenv?
+  vars:
+    packages:
+      - ccze
+      - curl
+      - git
+      - gnupg2
+      - gnupg-agent
+      - htop
+      - keychain
+      - mercurial
+      - net-tools
+      - nmap
+      - pinentry-curses
+      - pycodestyle
+      - pylint
+      - pylint3
+      - python-flake8
+      - python-pip
+      - scdaemon
+      - silversearcher-ag
+      - tmux
+      - tree
+      - vim
+      - virtualenvwrapper
+      - wget
+      - zsh
+     #- pipenv?
 
 - name: Change shell to ZSH
   become: yes

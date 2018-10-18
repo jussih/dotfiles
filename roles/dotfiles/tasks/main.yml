@@ -54,3 +54,8 @@
   copy:
     src=bin
     dest=~/
+
+- name: Copy GPG config
+  copy:
+    src=.gnupg/gpg.conf
+    dest=~/.gnupg/
