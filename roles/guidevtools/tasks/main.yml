@@ -5,17 +5,20 @@
   apt: update_cache=yes
 
 - name: Install GUI applications
-  apt: name={{ item }} state=latest
+  apt:
+    name: "{{ packages }}"
+    state: latest
   become: yes
   become_method: sudo
-  with_items:
-    - dunst
-    - gnome-themes-standard  # adwaita for gtk2
-    - i3
-    - meld
-    - rxvt-unicode-256color
-    - vim-gtk3
-    - xclip
+  vars:
+    packages:
+      - dunst
+      - gnome-themes-standard  # adwaita for gtk2
+      - i3
+      - meld
+      - rxvt-unicode-256color
+      - vim-gtk
+      - xclip
 
 - name: Create font directory
   file: path=~/.local/share/fonts/ state=directory
