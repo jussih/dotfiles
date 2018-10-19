@@ -35,6 +35,7 @@
       - pylint3
       - python-flake8
       - python-pip
+      - ranger
       - scdaemon
       - silversearcher-ag
       - tmux
