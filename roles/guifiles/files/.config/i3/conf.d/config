@@ -161,7 +161,7 @@ bar {
 }
 
 # pause dunst during screen lock
-bindsym $mod+Control+l exec "killall -SIGUSR1 dunst && i3lock --nofork -i ~/.i3/lock-1024x600.png -c 3e435a && killall -SIGUSR2 dunst"
+bindsym $mod+Control+l exec killall -SIGUSR1 dunst && i3lock --nofork -t -i $(find ~/Pictures/taustakuvat/ -name "*.png" | shuf -n1) -c 3e435a && killall -SIGUSR2 dunst
 
 # scratchpad
 bindsym $mod+m move scratchpad
@@ -181,6 +181,7 @@ bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 25 -steps 1
 
 bindsym Print exec gnome-screenshot -i
 for_window [class="Gnome-screenshot"] floating enable
+for_window [class="Gnome-calculator"] floating enable
 for_window [class="Gcalctool"] floating enable
 for_window [class="^Spotify$"] floating enable
 
