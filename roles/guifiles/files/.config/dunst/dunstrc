@@ -1,12 +1,11 @@
 [global]
-    font = "Inconsolata 12"
-    allow_markup = yes
+    font = "Source Sans Pro 14"
+    markup = full
     format = "<b>%s %p</b>\n%b"
     sort = yes
     indicate_hidden = true
-    # geometry = "x5"
     idle_threshold = 0
-    geometry = "300x5-30+60"
+    geometry = "480x5-30+30"
     alignment = left
     show_age_threshold = 60
     sticky_history = yes
@@ -21,13 +20,11 @@
     browser = chromium-browser
     shrink = false
     icon_position = left
-    # Paths to default icons.
-    icon_folders = ~/.local/share/icons/Paper/16x16/status/:~/.local/share/icons/Paper/16x16/devices/
-
-
-[frame]
-    width = 1
-    color = "#333333"
+    # Paths to default icons. Support for "~" in paths will be in 1.4.0
+    icon_path = "/home/juba/.local/share/icons/Paper/48x48/status/:/home/juba/.local/share/icons/Paper/48x48/devices/"
+    max_icon_size = 128
+    frame_width = 1
+    frame_color = "#333333"
 
 [shortcuts]
     #close = ctrl+space
@@ -36,52 +33,25 @@
     #context = ctrl+shift+period
 
 [urgency_low]
-    background = "#e5e5e5"
+    background = "#C8F5F3"
     foreground = "#333333"
     timeout = 30
-    icon = lamp
 
 [urgency_normal]
-    background = "#7EA8EB"
-    foreground = "#333333"
+    background = "#3A78AC"
+    foreground = "#222222"
     timeout = 45
-    icon = feed
+    icon = dialog-information
 
 [urgency_critical]
-    background = "#ff9999"
+    background = "#D8413B"
     foreground = "#333333"
     timeout = 0
-    icon = warning2
+    icon = dialog-error
 
+[Spotify]
+    appname = "*Spotify*"
+    background = "#1DB954"
+    foreground = "#FFFFFF"
+    timeout = 10
 
-[libpurple_signed]
-    appname = libpurple
-    summary = *igned*
-    urgency = low
-    timeout = 3
-    background = "#ccff33"
-
-[libpurple_came_back]
-    appname = libpurple
-    summary = "*came*"
-    format = ""
-
-[libpurple_went_away]
-    appname = libpurple
-    summary = "*went*"
-    format = ""
-
-[libpurple_says]
-    appname = libpurple
-    summary = *ays*
-    urgency = critical
-    background = "#ccff33"
-
-[libpurple]
-    appname = libpurple
-    urgency = critical
-    background = "#ccff33"
-
-[test]
-    summary = "*test*"
-    background="#22dd22"
