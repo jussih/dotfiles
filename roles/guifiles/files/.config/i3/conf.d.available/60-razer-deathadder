@@ -1,0 +1,4 @@
+
+# Razer DeathAdder mouse
+exec --no-startup-id 'xinput --set-prop "Razer Razer DeathAdder" "libinput Accel Speed" -1'
+

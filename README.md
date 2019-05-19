@@ -1,6 +1,6 @@
 # Dotfiles and more as Ansible playbooks for Ubuntu
 
-- Install ansible v2+
+- Install ansible v2+ (not needed on Ubuntu 18.04)
   - `sudo apt-get install software-properties-common`
   - `sudo apt-add-repository ppa:ansible/ansible`
   - `sudo apt-get update`
@@ -24,6 +24,7 @@
   - Config is assembled from files in ~/.config/i3/conf.d during Ansible
     execution - add local customizations there
 - Dunst
+- Rofi as app launcher
 - URXVT as terminal emulator
 - Solarized color theme for GVim and terminals
 - Paper Icon Theme for GTK

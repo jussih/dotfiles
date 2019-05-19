@@ -1,0 +1,21 @@
+
+# Customizations for Dell XPS13
+exec --no-startup-id xinput set-prop "DELL07E6:00 06CB:76AF Touchpad" "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop "DELL07E6:00 06CB:76AF Touchpad" "libinput Tapping Drag Enabled" 0
+exec --no-startup-id xinput set-prop "DELL07E6:00 06CB:76AF Touchpad" "libinput Natural Scrolling Enabled" 1
+
+set $displayMode "Set display mode [1] clone [2] extend primary [3] extra monitor only [4] internal display only"
+bindsym $mod+Shift+d mode $displayMode
+mode $displayMode {
+    bindsym 1 exec "~/.config/i3/scripts/xps13-clone.sh"; \
+                mode "default"
+    bindsym 2 exec "~/.config/i3/scripts/xps13-extra-primary.sh"; \
+                mode "default"
+    bindsym 3 exec "~/.config/i3/scripts/xps13-extra-only.sh"; \
+                mode "default"
+    bindsym 4 exec "~/.config/i3/scripts/xps13-internal-only.sh"; \
+                mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}

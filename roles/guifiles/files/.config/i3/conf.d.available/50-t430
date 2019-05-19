@@ -1,0 +1,6 @@
+
+# Customizations for Lenovo T430
+exec --no-startup-id 'xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Finger" 30 50 105'
+exec --no-startup-id 'xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Noise Cancellation" 20 20'
+exec --no-startup-id "synclient HorizTwoFingerScroll=1 VertScrollDelta=-101 PalmDetect=1"
+

@@ -3,6 +3,7 @@
   copy:
     src=.config
     dest=~/
+    force=false
 
 - name: Copy GUI dotfiles
   copy:
