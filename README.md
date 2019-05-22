@@ -16,6 +16,11 @@
 - FZF
 - RipGrep
 - TMUX
+- GPG with smartcard support
+  - Optionally use GPG agent in place of SSH agent, so PGP keys on a Yubikey can
+    be used for SSH authentication. Add `export USE_GPG_AGENT=1` to
+    `~/.zshrc.local` to enable.
+
 
 ### GUI
 - GVim

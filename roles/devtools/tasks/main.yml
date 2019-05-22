@@ -30,6 +30,7 @@
       - net-tools
       - nmap
       - pinentry-curses
+      - pinentry-gnome3
       - pycodestyle
       - pylint
       - pylint3
