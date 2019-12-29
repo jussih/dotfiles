@@ -23,6 +23,7 @@
       - zeal
       - pasystray
       - feh
+      - pinentry-gnome3
 
 - name: Create font directory
   file: path=~/.local/share/fonts/ state=directory
