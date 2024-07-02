@@ -21,6 +21,7 @@
     packages:
       - ccze
       - curl
+      - fzf
       - git
       - gnupg2
       - gnupg-agent
@@ -32,38 +33,18 @@
       - pinentry-curses
       - pycodestyle
       - pylint
-      - pylint3
-      - python-flake8
-      - python-pip
+      - python3-flake8
+      - python3-pip
       - ranger
       - scdaemon
-      - silversearcher-ag
+      - ripgrep
       - tmux
       - tree
       - vim
       - virtualenvwrapper
       - wget
       - zsh
-     #- pipenv?
 
 - name: Change shell to ZSH
   become: yes
   user: shell=/bin/zsh name={{ ansible_user_id }}
-
-- name: Install Ripgrep from Github release
-  become: yes
-  become_method: sudo
-  apt:
-    deb: https://github.com/BurntSushi/ripgrep/releases/download/{{ RG_VERSION }}/ripgrep_{{ RG_VERSION }}_amd64.deb
-
-- name: Clone FZF from Github
-  git:
-    repo: 'https://github.com/junegunn/fzf.git'
-    dest:  ~/.fzf
-    version: '{{ FZF_VERSION }}'
-
-- name: Download FZF Ubuntu binary
-  unarchive:
-    src: https://github.com/junegunn/fzf-bin/releases/download/{{ FZF_VERSION }}/fzf-{{ FZF_VERSION }}-linux_amd64.tgz
-    dest: ~/bin/
-    remote_src: yes
