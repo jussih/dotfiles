@@ -19,6 +19,7 @@
   become_method: sudo
   vars:
     packages:
+      - bat
       - ccze
       - curl
       - fzf
@@ -42,6 +43,7 @@
       - ripgrep
       - tmux
       - tree
+      - unzip
       - vim
       - virtualenvwrapper
       - wget

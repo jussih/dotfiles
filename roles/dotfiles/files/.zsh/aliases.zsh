@@ -20,3 +20,5 @@ alias f='xdg-open "$PWD"' # Open current directory onto GUI file browser.
 alias myip='curl http://checkip.amazonaws.com' # print public ip
 
 alias mkdir='mkdir --parents' # Make parent directories as needed
+
+alias bat='batcat'
