@@ -66,3 +66,10 @@
     src=.gnupg/gpg-agent.conf
     dest=~/.gnupg/
     force=false
+
+- name: Clone Nvim config repository
+  git:
+    repo=https://github.com/jussih/nvim.config.git
+    dest=~/.config/nvim
+    clone=yes
+    update=yes
