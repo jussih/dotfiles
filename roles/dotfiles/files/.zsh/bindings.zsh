@@ -1,8 +1,15 @@
+# create a zkbd compatible hash;
+# to add other keys to this hash, see: man 5 terminfo
+typeset -g -A key
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+
+
 # Insert mode
 bindkey -M viins '^R' history-incremental-pattern-search-backward
 bindkey -M viins '^w' backward-kill-word
-bindkey -M viins '^[[A' up-line-or-beginning-search # Up
-bindkey -M viins '^[[B' down-line-or-beginning-search # Down
+[[ -n "${key[Up]}"        ]] && bindkey -M viins "${key[Up]}" up-line-or-beginning-search
+[[ -n "${key[Down]}"      ]] && bindkey -M viins "${key[Down]}" down-line-or-beginning-search
 bindkey -M viins -s '^p' 'fzfedit\n' # edit file selected with fzf
 
 # Normal mode
@@ -31,3 +38,12 @@ bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move
 bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
 bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
 
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+	autoload -Uz add-zle-hook-widget
+	function zle_application_mode_start { echoti smkx }
+	function zle_application_mode_stop { echoti rmkx }
+	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+fi
