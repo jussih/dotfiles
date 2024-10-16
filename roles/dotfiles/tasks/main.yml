@@ -67,9 +67,10 @@
     dest=~/.gnupg/
     force=false
 
-- name: Clone Nvim config repository
+- name: Clone Nvim config repository (requires ssh key)
+  ignore_errors: true
   git:
-    repo=https://github.com/jussih/nvim.config.git
+    repo=git@github.com:jussih/nvim.config.git
     dest=~/.config/nvim
     clone=yes
-    update=yes
+    update=no
