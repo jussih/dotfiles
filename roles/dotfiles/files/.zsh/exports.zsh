@@ -2,7 +2,7 @@
 export PATH=$HOME/bin:/usr/local/bin:/snap/bin:$PATH
 
 # Default Editors
-export EDITOR=vim
+export EDITOR=nvim
 export GUI_EDITOR=gvim
 
 # Default Pager
