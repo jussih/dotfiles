@@ -47,6 +47,7 @@
       - vim
       - virtualenvwrapper
       - wget
+      - zoxide
       - zsh
 
 - name: Change shell to ZSH

@@ -1,6 +1,6 @@
 # Load completion initialization to enable completion.
-autoload -U compinit
-compinit -d $HOME/.zsh/cache/.zcompdump # Completion cache file.
+autoload -Uz compinit
+compinit
 
 # Load prompt system.
 autoload -U promptinit
