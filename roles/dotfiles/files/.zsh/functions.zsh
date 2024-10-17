@@ -57,3 +57,30 @@ function c () {
 function i3-config-build () {
   cat ~/.config/i3/conf.d/* > ~/.config/i3/config
 }
+
+# Activate or create a Python virtualenv
+function activate_venv {
+    local VENV_DIRS=("venv" ".venv" "env" ".env" "virtualenv" "pyenv")
+    for venv_dir in "${VENV_DIRS[@]}"; do
+        if [ -d "$venv_dir" ] && [ -f "$venv_dir/bin/activate" ]; then
+            source "$venv_dir/bin/activate"
+            echo "Activated virtualenv: $venv_dir"
+            return 0
+        fi
+    done
+    # No existing virtualenv found, create a new one
+    echo "No existing virtualenv found. Creating a new one..."
+    if uv venv; then
+        if [ -f ".venv/bin/activate" ]; then
+            source ".venv/bin/activate"
+            echo "Created and activated new virtualenv: .venv"
+            return 0
+        else
+            echo "Failed to find the activate script in .venv"
+            return 1
+        fi
+    else
+        echo "Failed to create virtualenv with 'uv venv'"
+        return 1
+    fi
+}
