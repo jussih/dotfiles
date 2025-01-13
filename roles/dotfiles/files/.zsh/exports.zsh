@@ -1,5 +1,5 @@
 # Path
-export PATH=$HOME/bin:/usr/local/bin:/snap/bin:$PATH
+export PATH=/usr/local/bin:/snap/bin:$PATH:$HOME/bin:$HOME/.local/bin
 
 # Default Editors
 export EDITOR=nvim
