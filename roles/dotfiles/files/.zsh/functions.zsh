@@ -59,28 +59,50 @@ function i3-config-build () {
 }
 
 # Activate or create a Python virtualenv
-function activate_venv {
-    local VENV_DIRS=("venv" ".venv" "env" ".env" "virtualenv" "pyenv")
-    for venv_dir in "${VENV_DIRS[@]}"; do
-        if [ -d "$venv_dir" ] && [ -f "$venv_dir/bin/activate" ]; then
-            source "$venv_dir/bin/activate"
-            echo "Activated virtualenv: $venv_dir"
-            return 0
-        fi
+function activate_venv() {
+  local dir="$PWD"
+
+  # Search upward until we reach home
+  while :; do
+    # The local_options block makes sure globs that match nothing
+    # simply disappear (null_glob) and that dot‑dirs are included (dot_glob).
+    setopt local_options null_glob dot_glob
+
+    # Iterate over *only* sub‑directories (/( qualifier)) – both normal and dot‑dirs.
+    for candidate in "$dir"/*(/) "$dir"/.*(/); do
+      # Skip the obligatory . and ..
+      [[ $candidate == "$dir/." || $candidate == "$dir/.." ]] && continue
+
+      if [[ -f "$candidate/bin/activate" && -f "$candidate/pyvenv.cfg" ]]; then
+        source "$candidate/bin/activate"
+        echo "Activated virtualenv: $candidate"
+        return 0
+      fi
     done
-    # No existing virtualenv found, create a new one
-    echo "No existing virtualenv found. Creating a new one..."
-    if uv venv; then
-        if [ -f ".venv/bin/activate" ]; then
-            source ".venv/bin/activate"
-            echo "Created and activated new virtualenv: .venv"
-            return 0
-        else
-            echo "Failed to find the activate script in .venv"
-            return 1
-        fi
-    else
-        echo "Failed to create virtualenv with 'uv venv'"
-        return 1
+
+    # Stop when we reach the filesystem root
+    [[ $dir == "$HOME" || $dir == "/" ]] && break
+    dir="$(dirname "$dir")"
+  done
+  echo "No virtualenv found"
+  return 1
+}
+
+
+# Find and run a tasks.py in the current directory or any parent directory
+function call_taskspy() {
+  local dir="$PWD"
+
+  # Search parents for tasks.py
+  while :; do
+    if [[ -f "$dir/tasks.py" ]]; then
+      uv run --directory $dir --no-project $dir/tasks.py $*
+      return 0
     fi
+
+    [[ $dir == "$HOME" || $dir == "/" ]] && break
+    dir="$(dirname "$dir")"
+  done
+  echo "No tasks.py found here or in parents"
+  return 1
 }

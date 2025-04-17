@@ -24,3 +24,4 @@ alias mkdir='mkdir --parents' # Make parent directories as needed
 alias bat='batcat'
 
 alias ,e='activate_venv'
+alias ,t='call_taskspy'
