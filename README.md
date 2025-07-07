@@ -12,11 +12,17 @@
 ## Features
 ### CLI (Ubuntu 24.04+)
 - Vim
+- NeoVim configuration installed from separate repo
 - ZSH with standalone config
+  - Machine specific configuration should be put to ~/.zshrc.local - other config files are overwritten
 - FZF
+  - Fast fuzzy searching (such as command line history with CTRL+R)
 - RipGrep
+  - Faster grep alternative
 - TMUX
-- Zoxide
+  - Terminal multiplexing
+- Zoxide 
+  - Directory switcher with frecency search
 - GPG with smartcard support
   - Optionally use GPG agent in place of SSH agent, so PGP keys on a Yubikey can
     be used for SSH authentication. Add `export USE_GPG_AGENT=1` to
