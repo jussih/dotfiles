@@ -1,0 +1,9 @@
+#!/bin/bash
+if [[ $1 =~ ^https?:// ]]; then
+    # Handle URLs directly
+    /mvm/c/Windows/System32/cmd.exe /c start "$1"
+else
+    # Convert WSL path to Windows path
+    winpath=$(wslpath -w "$1")
+    /mnt/c/Windows/System32/cmd.exe /c start "$winpath"
+fi

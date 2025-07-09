@@ -55,6 +55,11 @@
     src=bin
     dest=~/
 
+- name: Copy .local/bin scripts
+  copy:
+    src=.local/bin
+    dest=~/.local/bin
+
 - name: Copy GPG config
   copy:
     src=.gnupg/gpg.conf
