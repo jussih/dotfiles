@@ -88,7 +88,6 @@ function activate_venv() {
   return 1
 }
 
-
 # Find and run a tasks.py in the current directory or any parent directory
 function call_taskspy() {
   local dir="$PWD"
@@ -105,4 +104,20 @@ function call_taskspy() {
   done
   echo "No tasks.py found here or in parents"
   return 1
+}
+
+function mkcd() {
+  mkdir -p "$1"
+  cd "$1"
+}
+
+# Create and switch to a temporary directory
+tempe () {
+  cd "$(mktemp -d)"
+  chmod -R 0700 .
+  if [[ $# -eq 1 ]]; then
+    \mkdir -p "$1"
+    cd "$1"
+    chmod -R 0700 .
+  fi
 }
