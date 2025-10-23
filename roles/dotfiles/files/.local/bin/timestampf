@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+# Echo a timestamp formatted for filenames
+echo -n "$(date "+%Y-%m-%dT%H_%M_%S")"
+
