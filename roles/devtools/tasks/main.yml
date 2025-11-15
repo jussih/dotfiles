@@ -18,6 +18,7 @@
       - bat
       - ccze
       - curl
+      - fd-find
       - fzf
       - git
       - gnupg2
@@ -50,3 +51,15 @@
 - name: Change shell to ZSH
   become: yes
   user: shell=/bin/zsh name={{ ansible_user_id }}
+
+- name: Ensure ~/.local/bin exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/bin"
+    state: directory
+    mode: "0700"
+
+- name: Symlink fdfind to fd
+  ansible.builtin.file:
+    src: /usr/bin/fdfind
+    dest: "{{ ansible_env.HOME }}/.local/bin/fd"
+    state: link
