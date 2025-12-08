@@ -1,7 +1,10 @@
 #!/bin/bash
+
+WEB_BROWSER="/mnt/c/Program Files/Mozilla Firefox/firefox.exe"
+
 if [[ $1 =~ ^https?:// ]]; then
-    /mnt/c/Windows/System32/cmd.exe /c start firefox -url "$1"
+    "$WEB_BROWSER" -url "$1"
 else
     winpath=$(wslpath -w "$1")
-    /mnt/c/Windows/System32/cmd.exe /c start firefox -url "$winpath"
+    "$WEB_BROWSER" -url "$winpath"
 fi
