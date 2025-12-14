@@ -1,0 +1,61 @@
+---
+# Load distribution-specific variables
+- name: Load distribution-specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+  tags: always
+
+- name: Install development tools (Debian/Ubuntu)
+  apt:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: true
+  become: yes
+  become_method: sudo
+  when: ansible_os_family == "Debian"
+
+- name: Install Rust toolchain via rustup
+  command: rustup default stable
+  become: yes
+  become_user: "{{ ansible_user_id }}"
+  args:
+    creates: "{{ ansible_env.HOME }}/.rustup/toolchains"
+
+- name: Change shell to ZSH
+  become: yes
+  user:
+    shell: /bin/zsh
+    name: "{{ ansible_user_id }}"
+
+- name: Ensure fi locale exists
+  community.general.locale_gen:
+    name: fi_FI.UTF-8
+    state: present
+  become: yes
+  become_method: sudo
+
+- name: Ensure ~/.local/bin exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/bin"
+    state: directory
+    mode: "0700"
+
+- name: Download NeoVim AppImage
+  ansible.builtin.get_url:
+    url: "https://github.com/neovim/neovim/releases/download/{{ neovim_version }}/nvim-linux-x86_64.appimage"
+    dest: "{{ ansible_env.HOME }}/.local/bin/nvim"
+    mode: "0755"
+
+- name: Symlink fdfind to fd
+  ansible.builtin.file:
+    src: "{{ fd_binary_path }}"
+    dest: "{{ ansible_env.HOME }}/.local/bin/fd"
+    state: link
+  when: fd_needs_symlink | default(false)
+
+- name: Cargo install uv
+  community.general.cargo:
+    name: uv
+    locked: true
