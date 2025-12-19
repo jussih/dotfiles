@@ -19,11 +19,13 @@
       - ccze
       - curl
       - fd-find
+      - fswatch
       - fzf
       - git
       - gnupg2
       - gnupg-agent
       - htop
+      - inotify-tools
       - keychain
       - mercurial
       - net-tools
