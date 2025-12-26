@@ -48,6 +48,12 @@
     dest: "{{ ansible_env.HOME }}/.local/bin/nvim"
     mode: "0755"
 
+- name: Clone nvim.config repository
+  ansible.builtin.git:
+    repo: https://github.com/jussih/nvim.config.git
+    dest: "{{ ansible_env.HOME }}/.config/nvim"
+    update: yes
+
 - name: Symlink fdfind to fd
   ansible.builtin.file:
     src: "{{ fd_binary_path }}"
