@@ -14,19 +14,19 @@ function sshtmux() {
 compdef sshtmux=ssh
 alias s=sshtmux
 
-# Grep, present results in fzf and open selected file in Vim
+# Grep, present results in fzf and open selected file in editor
 # params: ripgrep query
-function vimgrep() {
+function greped() {
   local file
   file="$(rg -S --no-heading -n --hidden -g \!"{.git,.hg,node_modules}" $@ | fzf -0 -1 | awk -F: '{print $1 " +" $2}')"
   if [[ -n $file ]]
   then
-     vim ${=file}
+     $EDITOR ${=file}
   fi
 }
 alias vg=vimgrep
 
-# Open file in Vim with fzf
+# Open file in editor with fzf
 function fzfedit() {
   local file
   file="$(fzf)"
@@ -68,7 +68,7 @@ function activate_venv() {
     # simply disappear (null_glob) and that dot‑dirs are included (dot_glob).
     setopt local_options null_glob dot_glob
 
-    # Iterate over *only* sub‑directories (/( qualifier)) – both normal and dot‑dirs.
+    # Iterate over *only* sub‑directories – both normal and dot‑dirs.
     for candidate in "$dir"/*(/) "$dir"/.*(/); do
       # Skip the obligatory . and ..
       [[ $candidate == "$dir/." || $candidate == "$dir/.." ]] && continue

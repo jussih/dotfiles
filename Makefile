@@ -31,13 +31,9 @@ install: stow
 
 stow:
 	@echo "Installing dotfiles with Stow..."
-	# Make sure dirs exist so stow symlinks only files inside of them
-	mkdir -p $${HOME}/.config/git
-	mkdir -p $${HOME}/.zsh/completion
-	mkdir -p $${HOME}/.zsh/cache
-	mkdir -p $${HOME}/.vim/bundle
-	mkdir -p $${HOME}/.vim/tmp
-	cd $(STOW_DIR) && stow -v --restow -t $${HOME} $(PACKAGES)
+	# --no-folding makes sure directories are not symlinked but created to the target
+	#  and individual files are linked.
+	cd $(STOW_DIR) && stow -v --no-folding --restow -t $${HOME} $(PACKAGES)
 	@echo "Done! Dotfiles installed."
 
 uninstall: unstow

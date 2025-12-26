@@ -2,194 +2,76 @@
 
 This repository manages system packages with Ansible and dotfiles with GNU Stow.
 
+## Supported distros
+
+- Debian 13+ (Trixie)
+- Ubuntu 25.10+
+
 ## Installation
 
 ### Prerequisites
 
-Install Ansible and GNU Stow:
+Bootstrap the environment (installs stow, make and ansible):
 
-**Debian/Ubuntu:**
 ```bash
-sudo apt install ansible stow
+sudo scripts/bootstrap_debian.sh
 ```
 
-**Fedora:**
+### Install dotfiles and devtools
+
 ```bash
-sudo dnf install ansible stow
+make debian
 ```
 
-**Arch Linux:**
+### Configure Git Identity
+
 ```bash
-sudo pacman -S ansible stow
+cp ~/.config/git/config.local.example ~/.config/git/config.local
+nvim ~/.config/git/config.local  # Add name and email
 ```
 
-### Step 1: Install Packages with Ansible
-
-Install CLI development tools using the Makefile target for your distribution:
-
-**Debian/Ubuntu:**
-```bash
-make install-debian
-```
-
-Or manually:
-```bash
-ansible-playbook -i ansible/hosts -K ansible/playbook.yml
-```
-
-**Note:** Fedora and Arch Linux support will be added in the future.
-
-### Step 2: Install Dotfiles with Stow
+### Optional - calling ansible and stow individually
 
 ```bash
 make stow
+make install-debian
 ```
 
-Or manually:
-```bash
-cd ~/dotfiles/stow
-stow shell git vim tmux tools gnupg ssh scripts
-```
 
-**Selective installation:** You can install individual packages as needed:
-```bash
-cd ~/dotfiles/stow
-stow shell git vim  # Just shell, git, and vim configs
-```
+## Machine-local Configuration
 
-### Step 3: Install NeoVim Config (Optional)
-
-NeoVim config is managed separately (not via Stow):
-```bash
-git clone git@github.com:jussih/nvim.config.git ~/.config/nvim
-```
-
-### Step 4: Configure Git Identity
-
-Create `~/.gitconfig.local` with your identity:
-```bash
-cat > ~/.gitconfig.local <<EOF
-[user]
-    name = Your Name
-    email = your@email.com
-EOF
-```
-
-## Architecture
-
-This repository is organized into two separate systems:
-
-### Ansible (System Packages)
-- **Location**: `ansible/` directory
-- **Purpose**: Install system packages and tools
-- **Supported Distributions**:
-  - Debian/Ubuntu (apt)
-  - Fedora/RHEL (future)
-  - Arch Linux (future)
-- **How it works**: Distribution-specific package lists in `ansible/roles/devtools/vars/`
-
-### GNU Stow (Dotfiles)
-- **Location**: `stow/` directory
-- **Purpose**: Symlink configuration files to `$HOME`
-- **Distribution-agnostic**: Works on any Linux/Unix system
-
-## Managing Dotfiles
-
-Since Stow creates symlinks, you can edit configs in place:
-```bash
-vim ~/.zshrc        # Changes are immediately in the repo
-cd ~/dotfiles
-git diff            # See your changes
-git commit -am "Update zsh config"
-```
-
-**Add/remove packages:**
-```bash
-cd ~/dotfiles/stow
-stow vim            # Add vim configs
-stow -D vim         # Remove vim configs
-```
-
-Or using the Makefile:
-```bash
-make stow           # Install all packages
-make unstow         # Uninstall all packages
-```
-
-## Stow Packages
-
-- **shell** - Bash/ZSH, .inputrc, .dircolors, .zsh/
-- **git** - Git configuration (uses ~/.gitconfig.local for identity)
-- **vim** - Vim configuration and plugins
-- **tmux** - Tmux configuration
-- **tools** - Dev tool configs (.ackrc, .pylintrc, .eslintrc.json, flake8)
-- **gnupg** - GPG configuration
-- **ssh** - SSH config template (.ssh/config.example)
-- **scripts** - User scripts in ~/.local/bin/
-
-**Note:** NeoVim config is managed separately (not via Stow) - clone directly to `~/.config/nvim`
-
-## Machine-Specific Configuration
-
-- **ZSH:** Create `~/.zshrc.local` for machine-specific settings (not managed by Stow)
-- **Git:** Edit `~/.gitconfig.local` for personal identity (not managed by Stow)
+- **ZSH:** Create `~/.zshrc.local` for machine-specific shell settings
+- **Git:** Edit `~/.config/git/config.local` for identity and other local settings
 - **SSH:** Copy `.ssh/config.example` to `.ssh/config` and customize
 
-## Adding Support for New Distributions
-
-To add support for a new distribution:
-
-1. Create a new vars file: `ansible/roles/devtools/vars/YourDistro.yml`
-2. Map package names to your distro's package manager
-3. Set `packages`, `fd_needs_symlink`, and `fd_binary_path` variables
-4. Add conditional package installation task in `ansible/roles/devtools/tasks/main.yml` if needed
-5. Add a new Makefile target: `install-yourdistro`
-6. Update the README with the new distribution
-
-See `ansible/roles/devtools/vars/Debian.yml` for an example.
-
-## Testing with Vagrant
-
-Test the Ansible playbook in a VM:
-
-```bash
-cd ansible/vagrant
-vagrant up
-```
-
-This will provision an Ubuntu VM and run the playbook automatically.
-
 ## Features
-### CLI (Ubuntu 24.04+)
-- Vim
-- NeoVim configuration installed from separate repo
-- ZSH with standalone config
+
+- NeoVim as default editor
+- ZSH as shell
   - Machine specific configuration should be put to ~/.zshrc.local - other config files are overwritten
-- FZF
-  - Fast fuzzy searching (such as command line history with CTRL+R)
-- RipGrep
-  - Faster grep alternative
-- TMUX
+- FZF (`fzf`)
+  - Fast fuzzy searching
+  - `CTRL+R` - search command history
+  - `CTRL+T` - pick a file to the command line, for example `nvim <CTRL+T>`
+  - `ALT+C` - cd to a subdirectory
+- RipGrep (`rg`)
+  - Extremely fast grep
+- TMUX (`tmux`)
   - Terminal multiplexing
-- Zoxide 
+  - `ALT+[1-9]` - switch window
+  - `CTRL+B C` - create window
+  - `CTRL+B "` - split vertically
+  - `CTRL+B %` - split horizontally
+  - `CTRL+B G` - Open Lazygit popover in current dir
+- Zoxide (`z`)
   - Directory switcher with frecency search
+  - `z <substring>` - change to a recent dir
+  - `z <substring><SPACE><TAB>` - fzf pick matches
+  - `zi <substring>` - fzf pick matches
 - GPG with smartcard support
   - Optionally use GPG agent in place of SSH agent, so PGP keys on a Yubikey can
     be used for SSH authentication. Add `export USE_GPG_AGENT=1` to
     `~/.zshrc.local` to enable.
-
-
-### GUI (Outdated)
-- GVim
-- Meld diff tool
-- I3
-  - Config is assembled from files in ~/.config/i3/conf.d during Ansible
-    execution - add local customizations there
-- Dunst
-- Rofi as app launcher
-- URXVT as terminal emulator
-- Solarized color theme for GVim and terminals
-- Paper Icon Theme for GTK
-- Inconsolata as monospace font
-- Source Sans Pro as UI font
-
+- Languages
+  - `uv` to manage Python
+  - `rustup` to manage Rust (latest stable toolchain installed by default)
