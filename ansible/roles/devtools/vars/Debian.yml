@@ -18,6 +18,7 @@ packages:
   - jq
   - keychain
   - lazygit
+  - locales
   - net-tools
   - nmap
   - pinentry-curses
