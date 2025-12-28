@@ -23,6 +23,12 @@ sudo scripts/bootstrap_debian.sh
 make debian
 ```
 
+On Ubuntu 25.10 where sudo-rs has replaced traditional sudo, use this workaround until https://github.com/ansible/ansible/issues/85837 is fixed.
+
+```bash
+ANSIBLE_BECOME_EXE=sudo.ws make debian
+```
+
 ### Configure Git Identity
 
 ```bash
