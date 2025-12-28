@@ -52,7 +52,7 @@
   ansible.builtin.git:
     repo: https://github.com/jussih/nvim.config.git
     dest: "{{ ansible_env.HOME }}/.config/nvim"
-    update: yes
+    update: false
 
 - name: Symlink fdfind to fd
   ansible.builtin.file:
