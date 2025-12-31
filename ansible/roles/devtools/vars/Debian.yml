@@ -43,3 +43,10 @@ packages:
 # fd symlink configuration (Debian names it fd-find)
 fd_needs_symlink: true
 fd_binary_path: /usr/bin/fdfind
+
+# Cargo packages to install
+cargo_packages:
+  - uv
+
+# Whether to download NeoVim AppImage
+neovim_appimage: true

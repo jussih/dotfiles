@@ -1,4 +1,4 @@
-.PHONY: help install uninstall stow unstow bootstrap-debian install-debian install-fedora install-arch debian
+.PHONY: help install uninstall stow unstow bootstrap-debian bootstrap-arch install-debian install-fedora install-arch debian arch
 
 STOW_DIR := stow
 PACKAGES := $(notdir $(wildcard $(STOW_DIR)/*))
@@ -11,6 +11,7 @@ help:
 	@echo ""
 	@echo "Bootstrap targets (install prerequisites):"
 	@echo "  bootstrap-debian   - Install Ansible and Stow on Debian/Ubuntu"
+	@echo "  bootstrap-arch     - Install Ansible and Stow on Arch Linux"
 	@echo ""
 	@echo "Stow targets (dotfiles only):"
 	@echo "  stow     - Install dotfiles using GNU Stow"
@@ -18,9 +19,11 @@ help:
 	@echo ""
 	@echo "Ansible targets (system packages):"
 	@echo "  install-debian     - Install packages on Debian/Ubuntu"
+	@echo "  install-arch       - Install packages on Arch Linux"
 	@echo ""
 	@echo "All-in-one targets:"
 	@echo "  debian             - Bootstrap + install packages + stow (Debian/Ubuntu)"
+	@echo "  arch               - Bootstrap + install packages + stow (Arch Linux)"
 	@echo ""
 	@echo "Manual workflow:"
 	@echo "  1. Run 'make bootstrap-<distro>' to install prerequisites"
@@ -54,11 +57,16 @@ install-fedora:
 
 install-arch:
 	@echo "Installing packages with Ansible (Arch Linux)..."
-	@echo "NOTE: Arch Linux support not yet implemented. Please add vars/Archlinux.yml first."
-	@exit 1
+	ansible-playbook -i $(ANSIBLE_INVENTORY) -K $(ANSIBLE_PLAYBOOK)
 
 bootstrap-debian:
 	@echo "Bootstrapping Debian/Ubuntu system..."
 	./scripts/bootstrap_debian.sh
 
+bootstrap-arch:
+	@echo "Bootstrapping Arch Linux system..."
+	./scripts/bootstrap_arch.sh
+
 debian: bootstrap-debian install-debian stow
+
+arch: bootstrap-arch install-arch stow

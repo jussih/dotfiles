@@ -3,8 +3,8 @@
 - name: Load distribution-specific variables
   include_vars: "{{ item }}"
   with_first_found:
-    - "{{ ansible_distribution }}.yml"
-    - "{{ ansible_os_family }}.yml"
+    - "{{ ansible_facts['distribution'] }}.yml"
+    - "{{ ansible_facts['os_family'] }}.yml"
   tags: always
 
 - name: Install development tools (Debian/Ubuntu)
@@ -14,20 +14,29 @@
     update_cache: true
   become: yes
   become_method: sudo
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Install development tools (Arch Linux)
+  community.general.pacman:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: true
+  become: yes
+  become_method: sudo
+  when: ansible_facts['os_family'] == "Archlinux"
 
 - name: Install Rust toolchain via rustup
   command: rustup default stable
   become: yes
-  become_user: "{{ ansible_user_id }}"
+  become_user: "{{ ansible_facts['user_id'] }}"
   args:
-    creates: "{{ ansible_env.HOME }}/.rustup/toolchains"
+    creates: "{{ ansible_facts['env']['HOME'] }}/.rustup/toolchains"
 
 - name: Change shell to ZSH
   become: yes
   user:
     shell: /bin/zsh
-    name: "{{ ansible_user_id }}"
+    name: "{{ ansible_facts['user_id'] }}"
 
 - name: Ensure fi locale exists
   community.general.locale_gen:
@@ -35,33 +44,37 @@
     state: present
   become: yes
   become_method: sudo
+  ignore_errors: true
 
 - name: Ensure ~/.local/bin exists
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.local/bin"
+    path: "{{ ansible_facts['env']['HOME'] }}/.local/bin"
     state: directory
     mode: "0700"
 
 - name: Download NeoVim AppImage
   ansible.builtin.get_url:
     url: "https://github.com/neovim/neovim/releases/download/{{ neovim_version }}/nvim-linux-x86_64.appimage"
-    dest: "{{ ansible_env.HOME }}/.local/bin/nvim"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/bin/nvim"
     mode: "0755"
+  when: neovim_appimage | default(false)
 
 - name: Clone nvim.config repository
   ansible.builtin.git:
     repo: https://github.com/jussih/nvim.config.git
-    dest: "{{ ansible_env.HOME }}/.config/nvim"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/nvim"
     update: false
 
 - name: Symlink fdfind to fd
   ansible.builtin.file:
     src: "{{ fd_binary_path }}"
-    dest: "{{ ansible_env.HOME }}/.local/bin/fd"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/bin/fd"
     state: link
   when: fd_needs_symlink | default(false)
 
-- name: Cargo install uv
+- name: Cargo install packages
   community.general.cargo:
-    name: uv
+    name: "{{ item }}"
     locked: true
+  loop: "{{ cargo_packages | default([]) }}"
+  when: cargo_packages | default([]) | length > 0

@@ -6,6 +6,7 @@ This repository manages system packages with Ansible and dotfiles with GNU Stow.
 
 - Debian 13+ (Trixie)
 - Ubuntu 25.10+
+- Arch Linux
 
 ## Installation
 
@@ -14,13 +15,19 @@ This repository manages system packages with Ansible and dotfiles with GNU Stow.
 Bootstrap the environment (installs stow, make and ansible):
 
 ```bash
+# Debian/Ubuntu
 sudo scripts/bootstrap_debian.sh
+# Arch
+sudo scripts/bootstrap_arch.sh
 ```
 
 ### Install dotfiles and devtools
 
 ```bash
+# Debian/Ubuntu
 make debian
+# Arch
+make arch
 ```
 
 On Ubuntu 25.10 where sudo-rs has replaced traditional sudo, use this workaround until https://github.com/ansible/ansible/issues/85837 is fixed.
@@ -41,8 +48,8 @@ nvim ~/.config/git/config.local  # Add name and email
 ```bash
 make stow
 make install-debian
+make install-arch
 ```
-
 
 ## Machine-local Configuration
 

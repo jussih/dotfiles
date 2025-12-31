@@ -1,0 +1,47 @@
+---
+# Arch Linux package names and configuration
+
+packages:
+  - bat
+  - btop
+  - curl
+  - fd
+  - fuse3
+  - fzf
+  - git
+  - glibc
+  - gnupg
+  - htop
+  - inotify-tools
+  - jq
+  - keychain
+  - lazygit
+  - net-tools
+  - neovim
+  - nmap
+  - pinentry
+  - python
+  - python-pip
+  - python-pipx
+  - python-virtualenvwrapper
+  - ranger
+  - ripgrep
+  - rustup
+  - shellcheck
+  - tmux
+  - tree
+  - unzip
+  - uv
+  - vim
+  - wget
+  - zoxide
+  - zsh
+
+# fd configuration (Arch names it fd, no symlink needed)
+fd_needs_symlink: false
+
+# Cargo packages to install (prefer pacman packages)
+cargo_packages: []
+
+# Whether to download NeoVim AppImage (false for Arch - use pacman package)
+neovim_appimage: false
