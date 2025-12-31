@@ -9,3 +9,4 @@ The repository is structured into 2 parts:
 The entry point is the `Makefile` in the root which contains a GNU Make setup for running Stow and Ansible. 
 Additionally, the `scripts/` folder contains independent shell scripts such as `booststrap_<distro_name>.sh` to install low level dependencies needed to invoke Make and Ansible, and `test_<distro_name>.sh` to test the system by installing into a clean Docker container.
 
+When making changes to the project, update README.md when the existing information there conflicts with the new changes.
