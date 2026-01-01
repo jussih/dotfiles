@@ -48,7 +48,7 @@ unstow:
 
 install-debian:
 	@echo "Installing packages with Ansible (Debian/Ubuntu)..."
-	ansible-playbook -i $(ANSIBLE_INVENTORY) -K $(ANSIBLE_PLAYBOOK)
+	ansible-playbook -v -i $(ANSIBLE_INVENTORY) -K $(ANSIBLE_PLAYBOOK)
 
 install-fedora:
 	@echo "Installing packages with Ansible (Fedora/RHEL)..."
@@ -57,7 +57,7 @@ install-fedora:
 
 install-arch:
 	@echo "Installing packages with Ansible (Arch Linux)..."
-	ansible-playbook -i $(ANSIBLE_INVENTORY) -K $(ANSIBLE_PLAYBOOK)
+	ansible-playbook -v -i $(ANSIBLE_INVENTORY) -K $(ANSIBLE_PLAYBOOK)
 
 bootstrap-debian:
 	@echo "Bootstrapping Debian/Ubuntu system..."

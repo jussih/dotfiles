@@ -39,6 +39,8 @@ packages:
   - vim
   - virtualenvwrapper
   - wget
+  - wl-clipboard
+  - xclip
   - zoxide
   - zsh
 

@@ -35,6 +35,8 @@ packages:
   - uv
   - vim
   - wget
+  - wl-clipboard
+  - xclip
   - zoxide
   - zsh
 
