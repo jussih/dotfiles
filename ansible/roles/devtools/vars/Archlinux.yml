@@ -19,6 +19,7 @@ packages:
   - net-tools
   - neovim
   - nmap
+  - nodejs
   - pinentry
   - python
   - python-pip

@@ -21,6 +21,8 @@ packages:
   - locales
   - net-tools
   - nmap
+  - nodejs
+  - npm
   - pinentry-curses
   - pipx
   - python-is-python3
