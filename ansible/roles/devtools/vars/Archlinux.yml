@@ -2,9 +2,11 @@
 # Arch Linux package names and configuration
 
 packages:
+  - base-devel
   - bat
   - btop
   - curl
+  - diffutils
   - fd
   - fuse3
   - fzf
@@ -22,12 +24,15 @@ packages:
   - nodejs
   - openssh
   - pinentry
+  - posix-c-development
+  - posix-software-development
   - python
   - python-pip
   - python-pipx
   - python-virtualenvwrapper
   - ranger
   - ripgrep
+  - rsync
   - rustup
   - shellcheck
   - tmux
