@@ -18,7 +18,6 @@ packages:
   - inotify-tools
   - jq
   - keychain
-  - lazygit
   - locales
   - net-tools
   - nmap
