@@ -20,6 +20,7 @@ packages:
   - neovim
   - nmap
   - nodejs
+  - openssh
   - pinentry
   - python
   - python-pip
