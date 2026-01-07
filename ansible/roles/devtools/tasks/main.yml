@@ -72,6 +72,13 @@
     state: link
   when: fd_needs_symlink | default(false)
 
+- name: Symlink batcat to bat
+  ansible.builtin.file:
+    src: "{{ bat_binary_path }}"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/bin/bat"
+    state: link
+  when: bat_needs_symlink | default(false)
+
 - name: Cargo install packages
   community.general.cargo:
     name: "{{ item }}"
