@@ -1,0 +1,78 @@
+#!/bin/bash
+
+# cleanproj - Cleanup temporary artifacts from code projects in the current directory and subdirectories.
+
+set -e
+
+DRY_RUN=false
+VERBOSE=false
+TARGET_DIR="."
+
+# Define cleanup patterns
+DIR_PATTERNS=(node_modules __pycache__ .pytest_cache .mypy_cache .ruff_cache .tox .venv venv target dist build .ipynb_checkpoints .next .cache .parcel-cache .turbo)
+FILE_PATTERNS=(*.pyc *.pyo *.pyd .DS_Store *.swp *.swo "*~")
+
+usage() {
+    echo "Usage: $(basename "$0") [options] [directory]"
+    echo ""
+    echo "Options:"
+    echo "  -n, --dry-run  Show what would be deleted without deleting"
+    echo "  -v, --verbose  Show detailed output"
+    echo "  -h, --help     Show this help message"
+    echo ""
+    echo "Patterns deleted:"
+    echo "  Directories: ${DIR_PATTERNS[*]}"
+    echo "  Files: ${FILE_PATTERNS[*]}"
+}
+
+# Parse arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -n|--dry-run) DRY_RUN=true ;;
+        -v|--verbose) VERBOSE=true ;;
+        -h|--help) usage; exit 0 ;;
+        *) 
+            [[ -d "$1" ]] && TARGET_DIR="$1" || { echo "Error: Directory '$1' not found."; exit 1; }
+            ;;
+    esac
+    shift
+done
+
+TARGET_DIR=$(realpath "$TARGET_DIR")
+
+echo "--- Cleaning up artifacts in: $TARGET_DIR ---"
+[[ "$DRY_RUN" == true ]] && echo "[DRY RUN] No files will be deleted."
+
+# Build find command patterns: -name pattern1 -o -name pattern2 ...
+build_pattern_args() {
+    local first=true
+    for p in "$@"; do
+        $first || echo -n " -o "
+        echo -n " -name \"$p\""
+        first=false
+    done
+}
+
+# Cleanup function
+cleanup() {
+    local type_flag="$1" patterns=("${@:2}")
+    [[ ${#patterns[@]} -eq 0 ]] && return
+
+    local cmd="find \"$TARGET_DIR\" -type $type_flag \($(build_pattern_args "${patterns[@]}") \)"
+    
+    if [[ "$VERBOSE" == true ]] || [[ "$DRY_RUN" == true ]]; then
+        eval "$cmd -print"
+    fi
+    
+    if [[ "$DRY_RUN" == false ]]; then
+        eval "$cmd -prune -exec rm -rf {} + 2>/dev/null || true"
+    fi
+}
+
+echo "Searching for temporary directories..."
+cleanup "d" "${DIR_PATTERNS[@]}"
+
+echo "Searching for temporary files..."
+cleanup "f" "${FILE_PATTERNS[@]}"
+
+echo "--- Cleanup complete ---"
