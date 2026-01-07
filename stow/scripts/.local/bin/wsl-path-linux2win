@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Convert WSL Linux path to Windows path
+# Example: /home/johndoe -> \\wsl.localhost\[distro name]\home\johndoe
+# Supports both absolute and relative paths (relative paths are expanded)
+
+set -e
+set -u
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: wsl-path-linux2win <linux-path>"
+    echo "Example: wsl-path-linux2win '/home/johndoe'"
+    exit 1
+fi
+
+linux_path="$1"
+
+# Expand relative paths to absolute paths
+if ! [[ "$linux_path" =~ ^/ ]]; then
+    linux_path="$(cd "$linux_path" 2>/dev/null && pwd)" || {
+        echo "Error: Cannot resolve relative path: $1"
+        exit 1
+    }
+fi
+
+# Sanity check: verify the path is absolute
+if ! [[ "$linux_path" =~ ^/.*$ ]]; then
+    echo "Error: Invalid Linux path format. Expected format: /path/to/file"
+    echo "Example: /home/johndoe"
+    exit 1
+fi
+
+# Get the distro name from environment variable
+if [[ -z "${WSL_DISTRO_NAME:-}" ]]; then
+    echo "Error: WSL_DISTRO_NAME environment variable is not set"
+    echo "This script must be run from within WSL"
+    exit 1
+fi
+
+distro_name="$WSL_DISTRO_NAME"
+
+# Convert forward slashes to backslashes
+windows_path="${linux_path//\//\\}"
+
+# Construct the full Windows UNC path
+wsl_windows_path="\\\\wsl.localhost\\${distro_name}${windows_path}"
+
+echo "$wsl_windows_path"

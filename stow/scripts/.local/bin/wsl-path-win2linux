@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Convert Windows file path to WSL Linux path
+# Example: C:\Users\johndoe\Downloads\file.zip -> /mnt/c/Users/johndoe/Downloads/file.zip
+
+set -e
+set -u
+
+if [[ $# -eq 0 ]]; then
+    echo "Usage: wsl-path-win2linux <windows-path>"
+    echo "Example: wsl-path-win2linux 'C:\Users\johndoe\Downloads\file.zip'"
+    exit 1
+fi
+
+windows_path="$1"
+
+# Sanity check: verify the path begins with [drive letter]:\
+if ! [[ "$windows_path" =~ ^[a-zA-Z]:\\.*$ ]]; then
+    echo "Error: Invalid Windows path format. Expected format: [drive letter]:\<path>"
+    echo "Example: C:\Users\johndoe\Downloads\file.zip"
+    exit 1
+fi
+
+# Extract drive letter and convert to lowercase
+drive_letter=$(echo "${windows_path:0:1}" | tr '[:upper:]' '[:lower:]')
+
+# Remove the drive letter and colon (e.g., "C:" becomes empty, leaving "\Users\...")
+path_without_drive="${windows_path:2}"
+
+# Convert backslashes to forward slashes
+linux_path="${path_without_drive//\\//}"
+
+# Construct the full WSL path
+wsl_linux_path="/mnt/${drive_letter}${linux_path}"
+
+echo "$wsl_linux_path"
