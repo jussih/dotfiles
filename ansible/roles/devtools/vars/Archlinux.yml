@@ -18,6 +18,8 @@ packages:
   - jq
   - keychain
   - lazygit
+  - man-db
+  - man-pages
   - net-tools
   - neovim
   - nmap
@@ -35,6 +37,8 @@ packages:
   - rsync
   - rustup
   - shellcheck
+  - openssh
+  - texinfo
   - tmux
   - tree
   - unzip
@@ -43,6 +47,7 @@ packages:
   - wget
   - wl-clipboard
   - xclip
+  - xdg-utils
   - zoxide
   - zsh
 
