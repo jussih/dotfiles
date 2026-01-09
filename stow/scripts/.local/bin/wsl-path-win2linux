@@ -9,6 +9,8 @@ set -u
 if [[ $# -eq 0 ]]; then
     echo "Usage: wsl-path-win2linux <windows-path>"
     echo "Example: wsl-path-win2linux 'C:\Users\johndoe\Downloads\file.zip'"
+    echo "Note: When using in command substitution, quote the result:"
+    echo "      unzip \"\$(wsl-path-win2linux 'C:\\Users\\...\\file with spaces.zip')\""
     exit 1
 fi
 
