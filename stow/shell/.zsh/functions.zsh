@@ -24,7 +24,6 @@ function greped() {
      $EDITOR ${=file}
   fi
 }
-alias vg=vimgrep
 
 # Open file in editor with fzf
 function fzfedit() {
@@ -58,7 +57,7 @@ function i3-config-build () {
   cat ~/.config/i3/conf.d/* > ~/.config/i3/config
 }
 
-# Activate or create a Python virtualenv
+# Activate a Python virtualenv
 function activate_venv() {
   local dir="$PWD"
 
@@ -121,3 +120,22 @@ mktempcd () {
     chmod -R 0700 .
   fi
 }
+
+# Press "ctrl-x s" to prepend sudo to command line
+function sudo-command-line () {
+    [[ -z $BUFFER ]] && zle up-history
+    local cmd="sudo "
+    if [[ ${BUFFER} == ${cmd}* ]]; then
+        CURSOR=$(( CURSOR-${#cmd} ))
+        BUFFER="${BUFFER#$cmd}"
+    else
+        BUFFER="${cmd}${BUFFER}"
+        CURSOR=$(( CURSOR+${#cmd} ))
+    fi
+    zle reset-prompt
+}
+zle -N sudo-command-line # register as line editor widget - bindable with bindkey
+
+# Press "ctrl-x d" to insert the current date in the form yyyy-mm-dd
+function insert-datestamp () { LBUFFER+=${(%):-'%D{%Y-%m-%d}'}; }
+zle -N insert-datestamp

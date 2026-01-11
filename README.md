@@ -61,7 +61,9 @@ make install-arch
 
 - NeoVim as default editor
 - ZSH as shell
-  - Machine specific configuration should be put to ~/.zshrc.local - other config files are overwritten
+  - Machine specific configuration should be put to `~/.zshrc.local` - other config files are overwritten
+  - `CTRL+X s` - prepend current command line with sudo
+  - `CTRL+X d` - insert current date (YYYY-MM-DD) at current position
 - FZF (`fzf`)
   - Fast fuzzy searching
   - `CTRL+R` - search command history
@@ -71,11 +73,13 @@ make install-arch
   - Extremely fast grep
 - TMUX (`tmux`)
   - Terminal multiplexing
+  - Local config at `~/.config/tmux/tmux.conf.local`
   - `ALT+[1-9]` - switch window
   - `CTRL+B C` - create window
   - `CTRL+B "` - split vertically
   - `CTRL+B %` - split horizontally
-  - `CTRL+B G` - Open Lazygit popover in current dir
+  - `CTRL+B G` - open Lazygit popover in current dir
+  - `CTRL+B s` - switch sessions
 - Zoxide (`z`)
   - Directory switcher with frecency search
   - `z <substring>` - change to a recent dir

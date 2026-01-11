@@ -17,6 +17,8 @@ bindkey -M viins '^w' backward-kill-word
 [[ -n "${key[Up]}"        ]] && bindkey -M viins "${key[Up]}" up-line-or-beginning-search
 [[ -n "${key[Down]}"      ]] && bindkey -M viins "${key[Down]}" down-line-or-beginning-search
 bindkey -M viins -s '^p' 'fzfedit\n' # edit file selected with fzf
+bindkey -M viins '^xs' sudo-command-line # prepend sudo to command line
+bindkey -M viins '^xd' insert-datestamp # insert a timestamp on the command line (yyyy-mm-dd)
 
 # Normal mode
 bindkey -M vicmd 'k' history-beginning-search-backward-end
@@ -42,6 +44,7 @@ else
 fi
 [[ -n "${key[Control-Left]}"  ]] && bindkey -- "${key[Control-Left]}"  backward-word
 [[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word
+
 
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.

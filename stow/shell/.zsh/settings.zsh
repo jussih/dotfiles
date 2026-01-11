@@ -15,6 +15,7 @@ zstyle ':completion:*' cache-path $HOME/.zsh/cache/
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'  # case insensitive completion
 setopt completealiases  # Prevent aliases from being substituted before completion is attempted.
+setopt completeinword # Not just at the end
 setopt menu_complete  # Instead of listing possibilities, select the first match immediately.
 zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'  # SSH completion
 
@@ -49,9 +50,12 @@ setopt interactive_comments  # Allow comments even in interactive shells.
 
 # Job Control
 setopt long_list_jobs  # Display PID when suspending processes as well.
+setopt notify # Report the status of background jobs immediately
 
 # Prompt
 setopt prompt_subst  # Substitute variables in the prompt.
 
 unset correct  # Display the [nyae] correction prompt if incorrect command is entered.
 
+# General
+setopt nobeep
