@@ -8,6 +8,7 @@
     lstat = log --graph --date=relative --stat
     st = status
     b = branch -vva
+    pushup = !git push --set-upstream origin $(git branch --show-current)
 
     ddiff = -c core.pager=delta diff
     dlog = -c core.pager=delta log -p
