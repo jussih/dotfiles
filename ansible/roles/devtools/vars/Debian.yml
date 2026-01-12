@@ -11,6 +11,7 @@ packages:
   - fuse
   - fzf
   - git
+  - git-delta
   - gnupg2
   - gnupg-agent
   - htop

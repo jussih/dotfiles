@@ -11,6 +11,7 @@ packages:
   - fuse3
   - fzf
   - git
+  - git-delta
   - glibc
   - gnupg
   - htop

@@ -8,12 +8,23 @@
     lstat = log --graph --date=relative --stat
     st = status
     b = branch -vva
+
+    ddiff = -c core.pager=delta diff
+    dlog = -c core.pager=delta log -p
+    dshow = -c core.pager=delta show
+
 [push]
     default = simple
+
 [diff]
     tool = meld
+
 [merge]
     tool = meld
+
+[delta]
+    line-numbers = true
+    syntax-theme = Nord
 
 [include]
     path = ~/.config/git/config.local
