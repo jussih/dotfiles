@@ -9,6 +9,10 @@
     st = status
     b = branch -vva
     pushup = !git push --set-upstream origin $(git branch --show-current)
+    # rebasetobase starts an interactive rebase to the target branch commit where current branch diverted from (the base)
+    # handy for squashing commits
+    # example: git rebasetobase main
+    rebasetobase = rebase -i --keep-base
 
     ddiff = -c core.pager=delta diff
     dlog = -c core.pager=delta log -p
