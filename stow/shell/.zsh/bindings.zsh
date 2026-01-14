@@ -16,9 +16,10 @@ bindkey -M viins '^R' history-incremental-pattern-search-backward
 bindkey -M viins '^w' backward-kill-word
 [[ -n "${key[Up]}"        ]] && bindkey -M viins "${key[Up]}" up-line-or-beginning-search
 [[ -n "${key[Down]}"      ]] && bindkey -M viins "${key[Down]}" down-line-or-beginning-search
-bindkey -M viins -s '^p' 'fzfedit\n' # edit file selected with fzf
+bindkey -M viins -s '^e' 'fzfedit\n' # select file with fzf and edit it
 bindkey -M viins '^xs' sudo-command-line # prepend sudo to command line
 bindkey -M viins '^xd' insert-datestamp # insert a timestamp on the command line (yyyy-mm-dd)
+bindkey -M viins '^xe' edit-command-line # Edit current command in $EDITOR.
 
 # Normal mode
 bindkey -M vicmd 'k' history-beginning-search-backward-end

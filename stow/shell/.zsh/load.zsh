@@ -12,7 +12,8 @@ autoload -U colors
 colors
 
 # Load ZLE stuff.
-autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search edit-command-line
+zle -N edit-command-line
 
 # Load Version control system info for prompts.
 autoload -Uz vcs_info

@@ -61,7 +61,7 @@ function i3-config-build () {
 function activate_venv() {
   local dir="$PWD"
 
-  # Search upward until we reach home
+  # Search upward until we reach root or user home
   while :; do
     # The local_options block makes sure globs that match nothing
     # simply disappear (null_glob) and that dot‑dirs are included (dot_glob).
@@ -79,7 +79,7 @@ function activate_venv() {
       fi
     done
 
-    # Stop when we reach the filesystem root
+    # Stop when we reach the filesystem root or user home
     [[ $dir == "$HOME" || $dir == "/" ]] && break
     dir="$(dirname "$dir")"
   done
