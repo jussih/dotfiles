@@ -1,0 +1,39 @@
+#!/bin/bash
+
+if [ -n "$1" ]; then
+    PROJECT_DIR=$(realpath "$1")
+else
+    PROJECT_DIR=$(pwd)
+fi
+
+echo "Project dir: $PROJECT_DIR"
+
+bwrap \
+     --ro-bind /usr /usr \
+     --ro-bind /lib /lib \
+     --ro-bind /lib64 /lib64 \
+     --ro-bind /bin /bin \
+     --ro-bind /etc/resolv.conf /etc/resolv.conf \
+     --ro-bind /etc/hosts /etc/hosts \
+     --ro-bind /etc/ssl /etc/ssl \
+     --ro-bind /etc/passwd /etc/passwd \
+     --ro-bind /etc/group /etc/group \
+     --ro-bind-try "$HOME/.config/git/config" "$HOME/.config/git/config" \
+     --ro-bind-try "$HOME/.config/git/config.local" "$HOME/.config/git/config.local" \
+     --ro-bind-try "$HOME/.nvm" "$HOME/.nvm" \
+     --bind "$PROJECT_DIR" "$PROJECT_DIR" \
+     --bind-try "$HOME/.cursor" "$HOME/.cursor" \
+     --bind-try "$HOME/.config/cursor" "$HOME/.config/cursor" \
+     --bind-try "$HOME/.local/share/cursor-agent" "$HOME/.local/share/cursor-agent" \
+     --bind-try "$HOME/.local/bin" "$HOME/.local/bin" \
+     --tmpfs /tmp \
+     --proc /proc \
+     --dev /dev \
+     --share-net \
+     --unshare-pid \
+     --die-with-parent \
+     --chdir "$PROJECT_DIR" \
+     --ro-bind /dev/null "$PROJECT_DIR/.env" \
+     --ro-bind /dev/null "$PROJECT_DIR/.env.local" \
+     --ro-bind /dev/null "$PROJECT_DIR/.env.production" \
+     agent
