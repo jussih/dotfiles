@@ -5,6 +5,7 @@ packages:
   - bat
   - btop
   - ccze
+  - cloc
   - curl
   - fd-find
   - fswatch

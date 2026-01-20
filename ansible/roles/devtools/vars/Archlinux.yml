@@ -5,6 +5,7 @@ packages:
   - base-devel
   - bat
   - btop
+  - cloc
   - curl
   - diffutils
   - fd
