@@ -1,12 +1,12 @@
 #!/bin/bash
-# Run Cursor CLI agent in a bubblewrap sandbox, preventing unnecessary file system access
+# Run Github Copilot CLI in a bubblewrap sandbox, preventing unnecessary file system access
 # read only binding sensitive credential files to /dev/null masks them in the sandbox
 
 PROJECT_DIR=$(pwd)
 PARAMS=$@
 
 echo "Project dir: $PROJECT_DIR"
-echo "Cursor agent args: $PARAMS"
+echo "Copilot args: $PARAMS"
 
 bwrap \
      --ro-bind /usr /usr \
@@ -27,9 +27,11 @@ bwrap \
      --bind-try "$HOME/.cache/pip" "$HOME/.cache/pip" \
      --bind-try "$HOME/.npm" "$HOME/.npm" \
      --bind-try "$HOME/.claude/skills" "$HOME/.claude/skills" \
-     --bind-try "$HOME/.cursor" "$HOME/.cursor" \
-     --bind-try "$HOME/.config/cursor" "$HOME/.config/cursor" \
-     --bind-try "$HOME/.local/share/cursor-agent" "$HOME/.local/share/cursor-agent" \
+     --bind-try "$HOME/.copilot" "$HOME/.copilot" \
+     --bind-try "$HOME/.config/.copilot" "$HOME/.config/.copilot" \
+     --bind-try "$HOME/.config/gh" "$HOME/.config/gh" \
+     --bind-try "$HOME/.cache/Microsoft" "$HOME/.cache/Microsoft" \
+     --bind-try "$HOME/.cache/gh" "$HOME/.cache/gh" \
      --tmpfs /tmp \
      --proc /proc \
      --dev /dev \
@@ -39,4 +41,4 @@ bwrap \
      --chdir "$PROJECT_DIR" \
      --ro-bind /dev/null "$PROJECT_DIR/.env" \
      --ro-bind /dev/null "$PROJECT_DIR/.env.local" \
-     agent $PARAMS
+     copilot $PARAMS
