@@ -18,7 +18,8 @@ bwrap \
      --ro-bind /etc/ssl /etc/ssl \
      --ro-bind /etc/passwd /etc/passwd \
      --ro-bind /etc/group /etc/group \
-     --ro-bind-try "$HOME/.config/git" "$HOME/.config/git" \
+     --ro-bind-try "$HOME/.config/git/config" "$HOME/.config/git/config" \
+     --ro-bind-try "$HOME/.config/git/config.local" "$HOME/.config/git/config.local" \
      --ro-bind-try "$HOME/.config/uv" "$HOME/.config/uv" \
      --ro-bind-try "$HOME/.local/bin" "$HOME/.local/bin" \
      --ro-bind-try "$HOME/.nvm" "$HOME/.nvm" \
