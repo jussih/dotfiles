@@ -20,6 +20,8 @@ if [ -d ~/.local/bin ]; then
   PATH=~/.local/bin:"${PATH}"
 fi
 
+PATH=$HOME/.cargo/bin:"${PATH}"
+
 export EDITOR=nvim
 export PAGER=less
 
@@ -92,4 +94,10 @@ fi
 if [[ -x "$(command -v uv)" ]]; then
   eval "$(uv generate-shell-completion bash)"
   eval "$(uvx --generate-shell-completion bash)"
+fi
+
+
+# fnm shell integration
+if [[ -x "$(command -v fnm)" ]]; then
+  eval "$(fnm env --shell bash)"
 fi
