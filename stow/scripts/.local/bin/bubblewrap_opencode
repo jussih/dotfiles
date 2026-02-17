@@ -18,6 +18,7 @@ bwrap \
      --ro-bind /etc/ssl /etc/ssl \
      --ro-bind /etc/passwd /etc/passwd \
      --ro-bind /etc/group /etc/group \
+     --ro-bind-try "$HOME/dotfiles/stow/" "$HOME/dotfiles/stow/" \
      --ro-bind-try "$HOME/.config/git/config" "$HOME/.config/git/config" \
      --ro-bind-try "$HOME/.config/git/config.local" "$HOME/.config/git/config.local" \
      --ro-bind-try "$HOME/.config/uv" "$HOME/.config/uv" \
@@ -29,9 +30,15 @@ bwrap \
      --ro-bind-try "$HOME/.zshrc" "$HOME/.zshrc" \
      --ro-bind-try "$HOME/.zshrc.local" "$HOME/.zshrc.local" \
      --ro-bind-try "$HOME/.zsh" "$HOME/.zsh" \
+     --ro-bind-try "$HOME/.config/gh" "$HOME/.config/gh" \
+     --ro-bind-try "$HOME/.claude/skills" "$HOME/.claude/skills" \
+     --ro-bind-try "/run/user/1000/fnm_multishells" "/run/user/1000/fnm_multishells" \
+     --ro-bind-try "$HOME/.local/share/fnm" "$HOME/.local/share/fnm" \
      --bind "$PROJECT_DIR" "$PROJECT_DIR" \
      --bind-try "$HOME/.cache/uv" "$HOME/.cache/uv" \
      --bind-try "$HOME/.cache/pip" "$HOME/.cache/pip" \
+     --bind-try "$HOME/.cache/Microsoft" "$HOME/.cache/Microsoft" \
+     --bind-try "$HOME/.cache/gh" "$HOME/.cache/gh" \
      --bind-try "$HOME/.npm" "$HOME/.npm" \
      --bind-try "/run/user/1000/fnm_multishells" "/run/user/1000/fnm_multishells" \
      --bind-try "$HOME/.local/share/fnm" "$HOME/.local/share/fnm" \
