@@ -8,5 +8,8 @@
     "pyright": {
       "disabled": true
     }
-  }
+  },
+  "theme": "nord",
+  "share": "disabled",
+  "enabled_providers": ["github-copilot"]
 }
