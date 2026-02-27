@@ -52,6 +52,7 @@ packages:
   - wl-clipboard
   - xclip
   - xdg-utils
+  - yazi
   - zoxide
   - zsh
 
