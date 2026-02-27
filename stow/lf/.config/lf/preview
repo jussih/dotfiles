@@ -1,0 +1,24 @@
+#!/bin/sh
+# lf previewer — bat for text, ls for dirs, file for binary
+
+file="$1"
+width="$2"
+height="$3"
+
+if [ -d "$file" ]; then
+    ls -1A --color=always "$file" | head -n "$height"
+    exit 0
+fi
+
+mime=$(file --brief --mime-type "$file")
+
+case "$mime" in
+    text/*|application/json|application/javascript|application/xml|application/x-shellscript)
+        bat --color=always --style=numbers --terminal-width="$width" --line-range=:"$height" "$file"
+        ;;
+    *)
+        file --brief "$file"
+        echo
+        ls -lh "$file" | awk '{print "size: " $5}'
+        ;;
+esac

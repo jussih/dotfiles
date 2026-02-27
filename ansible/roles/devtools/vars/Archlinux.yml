@@ -21,6 +21,7 @@ packages:
   - jq
   - keychain
   - lazygit
+  - lf
   - man-db
   - man-pages
   - net-tools
@@ -52,7 +53,6 @@ packages:
   - wl-clipboard
   - xclip
   - xdg-utils
-  - yazi
   - zoxide
   - zsh
 

@@ -1,0 +1,102 @@
+# ── Settings ──────────────────────────────────────────────
+set hidden true
+set icons true
+set ratios 1:2:3
+set shell /bin/sh
+set shellopts '-eu'
+set scrolloff 10
+set period 1
+set mouse true
+set previewer ~/.config/lf/preview
+
+# ── Keybindings ───────────────────────────────────────────
+
+# toggle hidden files
+map . set hidden!
+
+# open: bat for text, xdg-open fallback
+cmd open ${{
+    mime=$(file --brief --mime-type "$f")
+    case "$mime" in
+        text/*|application/json|application/javascript|application/xml|application/x-shellscript)
+            bat --paging=always "$f" ;;
+        *)
+            xdg-open "$f" ;;
+    esac
+}}
+
+# full-screen preview with bat
+map i $bat --paging=always "$f"
+
+# edit in $EDITOR
+map e $$EDITOR "$f"
+
+# open in VS Code
+map o $code --goto "$f"
+
+# delete with confirmation
+cmd delete %{{
+    printf "delete '$fx'? [y/N] "
+    read -r ans
+    [ "$ans" = "y" ] && rm -rf $fx
+}}
+map D delete
+
+# rename variants
+cmd rename-at-end :rename
+cmd rename-at-start :rename; cmd-home
+cmd rename-clear :rename; cmd-delete-home
+map A rename-at-end
+map I rename-at-start
+map r rename-clear
+
+# yank path to clipboard
+# uses "copy" helper script
+cmd yank-path ${{
+    printf '%s' "$f" | copy
+}}
+map Y yank-path
+
+# fzf jump to file
+cmd fzf-jump ${{
+    sel=$(fzf --height=40% --reverse)
+    [ -n "$sel" ] && lf -remote "send $id select \"$sel\""
+}}
+map f fzf-jump
+
+# fzf grep content (rg + fzf)
+cmd fzf-grep ${{
+    sel=$(rg --files-with-matches --no-messages . | fzf --height=40% --reverse --preview 'bat --color=always --style=numbers {}')
+    [ -n "$sel" ] && lf -remote "send $id select \"$sel\""
+}}
+map F fzf-grep
+
+# zoxide jump
+cmd zoxide-jump ${{
+    dir=$(zoxide query -i)
+    [ -n "$dir" ] && lf -remote "send $id cd \"$dir\""
+}}
+map z zoxide-jump
+
+# mkdir
+cmd mkdir %{{
+    printf "directory name: "
+    read -r name
+    mkdir -p "$name"
+}}
+map <c-n> mkdir
+
+# extract archive
+cmd extract ${{
+    case "$f" in
+        *.tar.bz2) tar xjf "$f" ;;
+        *.tar.gz)  tar xzf "$f" ;;
+        *.tar.xz)  tar xJf "$f" ;;
+        *.tar)     tar xf "$f" ;;
+        *.zip)     unzip "$f" ;;
+        *.rar)     unrar x "$f" ;;
+        *.7z)      7z x "$f" ;;
+        *)         echo "unsupported format" ;;
+    esac
+}}
+map x extract
