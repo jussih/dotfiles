@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run Claude Code in a bubblewrap sandbox, preventing unnecessary file system access
+# Run Codex in a bubblewrap sandbox, preventing unnecessary file system access
 # read only binding sensitive credential files to /dev/null masks them in the sandbox
 
 PROJECT_DIR=$(pwd)
@@ -15,6 +15,7 @@ bwrap \
      --ro-bind /bin /bin \
      --ro-bind /etc/resolv.conf /etc/resolv.conf \
      --ro-bind /etc/hosts /etc/hosts \
+     --ro-bind /etc/ca-certificates /etc/ca-certificates \
      --ro-bind /etc/ssl /etc/ssl \
      --ro-bind /etc/passwd /etc/passwd \
      --ro-bind /etc/group /etc/group \
@@ -26,6 +27,7 @@ bwrap \
      --ro-bind-try "$HOME/.local/share/uv" "$HOME/.local/share/uv" \
      --ro-bind-try "$HOME/.local/bin" "$HOME/.local/bin" \
      --ro-bind-try "$HOME/.nvm" "$HOME/.nvm" \
+     --ro-bind-try "$HOME/.rustup" "$HOME/.rustup" \
      --ro-bind-try "/run/user/1000/fnm_multishells" "/run/user/1000/fnm_multishells" \
      --ro-bind-try "$HOME/.local/share/fnm" "$HOME/.local/share/fnm" \
      --bind "$PROJECT_DIR" "$PROJECT_DIR" \
@@ -34,9 +36,8 @@ bwrap \
      --bind-try "$HOME/.cache/Microsoft" "$HOME/.cache/Microsoft" \
      --bind-try "$HOME/.cache/gh" "$HOME/.cache/gh" \
      --bind-try "$HOME/.npm" "$HOME/.npm" \
-     --bind-try "$HOME/.claude" "$HOME/.claude" \
-     --bind-try "$HOME/.claude.json" "$HOME/.claude.json" \
-     --bind-try "$HOME/.local/share/claude" "$HOME/.local/share/claude" \
+     --bind-try "$HOME/.cargo" "$HOME/.cargo" \
+     --bind-try "$HOME/.codex" "$HOME/.codex" \
      --tmpfs /tmp \
      --proc /proc \
      --dev /dev \
@@ -46,4 +47,4 @@ bwrap \
      --chdir "$PROJECT_DIR" \
      --ro-bind /dev/null "$PROJECT_DIR/.env" \
      --ro-bind /dev/null "$PROJECT_DIR/.env.local" \
-     claude $PARAMS
+     codex $PARAMS

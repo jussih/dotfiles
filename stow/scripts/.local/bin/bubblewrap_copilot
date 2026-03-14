@@ -23,6 +23,7 @@ bwrap \
      --ro-bind-try "$HOME/.config/uv" "$HOME/.config/uv" \
      --ro-bind-try "$HOME/.local/share/uv" "$HOME/.local/share/uv" \
      --ro-bind-try "$HOME/.local/bin" "$HOME/.local/bin" \
+     --ro-bind-try "$HOME/.ssh/known_hosts" "$HOME/.ssh/known_hosts" \
      --ro-bind-try "$HOME/.nvm" "$HOME/.nvm" \
      --ro-bind-try "$HOME/.claude/skills" "$HOME/.claude/skills" \
      --ro-bind-try "/run/user/1000/fnm_multishells" "/run/user/1000/fnm_multishells" \
