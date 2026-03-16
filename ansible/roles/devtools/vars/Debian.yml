@@ -20,6 +20,7 @@ packages:
   - jq
   - keychain
   - lazygit
+  - lf
   - locales
   - net-tools
   - nmap

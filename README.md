@@ -79,7 +79,8 @@ make install-arch
   - `CTRL+B "` - split vertically
   - `CTRL+B %` - split horizontally
   - `CTRL+B G` - open Lazygit popover in current dir
-  - `CTRL+B s` - switch sessions
+  - `CTRL+B L` - open lf popover in current dir
+  - `CTRL+B S` - switch sessions
 - Zoxide (`z`)
   - Directory switcher with frecency search
   - `z <substring>` - change to a recent dir
