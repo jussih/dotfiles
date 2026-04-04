@@ -36,6 +36,15 @@ On Ubuntu 25.10 where sudo-rs has replaced traditional sudo, use this workaround
 ANSIBLE_BECOME_EXE=sudo.ws make debian
 ```
 
+### Install dotfiles and core shell tools
+
+```bash
+# Debian/Ubuntu
+make debian-core
+# Arch
+make arch-core
+```
+
 ### Configure Git Identity
 
 ```bash
@@ -54,7 +63,7 @@ make install-arch
 ## Machine-local Configuration
 
 - **ZSH:** Create `~/.zshrc.local` for machine-specific shell settings
-- **Git:** Edit `~/.config/git/config.local` for identity and other local settings
+- **Git:** Create `~/.config/git/config.local` for identity and other local settings
 - **SSH:** Copy `.ssh/config.example` to `.ssh/config` and customize
 
 ## Features
@@ -62,8 +71,9 @@ make install-arch
 - NeoVim as default editor
 - ZSH as shell
   - Machine specific configuration should be put to `~/.zshrc.local` - other config files are overwritten
-  - `CTRL+X s` - prepend current command line with sudo
-  - `CTRL+X d` - insert current date (YYYY-MM-DD) at current position
+  - `CTRL+X S` - prepend current command line with sudo
+  - `CTRL+X D` - insert current date (YYYY-MM-DD) at current position
+  - `CTRL+X E` - edit current command line in $EDITOR
 - FZF (`fzf`)
   - Fast fuzzy searching
   - `CTRL+R` - search command history
@@ -81,6 +91,8 @@ make install-arch
   - `CTRL+B G` - open Lazygit popover in current dir
   - `CTRL+B L` - open lf popover in current dir
   - `CTRL+B S` - switch sessions
+  - `CTRL+B $` - rename session
+  - `CTRL+B :` - enter tmux command, such as `new` to spawn new session
 - Zoxide (`z`)
   - Directory switcher with frecency search
   - `z <substring>` - change to a recent dir
