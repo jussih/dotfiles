@@ -1,4 +1,4 @@
-.PHONY: help install uninstall stow unstow bootstrap-debian bootstrap-arch install-debian install-fedora install-arch debian arch
+.PHONY: help install uninstall stow unstow bootstrap-debian bootstrap-arch install-debian install-fedora install-arch install-debian-core install-arch-core debian arch debian-core arch-core
 
 STOW_DIR := stow
 PACKAGES := $(notdir $(wildcard $(STOW_DIR)/*))
@@ -18,12 +18,16 @@ help:
 	@echo "  unstow - Uninstall dotfiles"
 	@echo ""
 	@echo "Ansible targets (system packages):"
-	@echo "  install-debian     - Install packages on Debian/Ubuntu"
-	@echo "  install-arch       - Install packages on Arch Linux"
+	@echo "  install-debian      - Install packages on Debian/Ubuntu"
+	@echo "  install-arch        - Install packages on Arch Linux"
+	@echo "  install-debian-core - Install core role only on Debian/Ubuntu"
+	@echo "  install-arch-core   - Install core role only on Arch Linux"
 	@echo ""
 	@echo "All-in-one targets:"
-	@echo "  debian             - Bootstrap + install packages + stow (Debian/Ubuntu)"
-	@echo "  arch               - Bootstrap + install packages + stow (Arch Linux)"
+	@echo "  debian              - Bootstrap + install packages + stow (Debian/Ubuntu)"
+	@echo "  arch                - Bootstrap + install packages + stow (Arch Linux)"
+	@echo "  debian-core         - Bootstrap + install core + stow (Debian/Ubuntu)"
+	@echo "  arch-core           - Bootstrap + install core + stow (Arch Linux)"
 	@echo ""
 	@echo "Manual workflow:"
 	@echo "  1. Run 'make bootstrap-<distro>' to install prerequisites"
@@ -50,6 +54,10 @@ install-debian:
 	@echo "Installing packages with Ansible (Debian/Ubuntu)..."
 	ansible-playbook -v -i $(ANSIBLE_INVENTORY) -K $(ANSIBLE_PLAYBOOK)
 
+install-debian-core:
+	@echo "Installing core packages with Ansible (Debian/Ubuntu)..."
+	ansible-playbook -v -i $(ANSIBLE_INVENTORY) -K --tags core $(ANSIBLE_PLAYBOOK)
+
 install-fedora:
 	@echo "Installing packages with Ansible (Fedora/RHEL)..."
 	@echo "NOTE: Fedora support not yet implemented. Please add vars/RedHat.yml first."
@@ -58,6 +66,10 @@ install-fedora:
 install-arch:
 	@echo "Installing packages with Ansible (Arch Linux)..."
 	ansible-playbook -v -i $(ANSIBLE_INVENTORY) -K $(ANSIBLE_PLAYBOOK)
+
+install-arch-core:
+	@echo "Installing core packages with Ansible (Arch Linux)..."
+	ansible-playbook -v -i $(ANSIBLE_INVENTORY) -K --tags core $(ANSIBLE_PLAYBOOK)
 
 bootstrap-debian:
 	@echo "Bootstrapping Debian/Ubuntu system..."
@@ -70,3 +82,7 @@ bootstrap-arch:
 debian: bootstrap-debian install-debian stow
 
 arch: bootstrap-arch install-arch stow
+
+debian-core: bootstrap-debian install-debian-core stow
+
+arch-core: bootstrap-arch install-arch-core stow

@@ -1,0 +1,35 @@
+---
+# Arch Linux package names and configuration
+
+packages:
+  - bat
+  - bind # for dig
+  - btop
+  - curl
+  - diffutils
+  - fd
+  - fzf
+  - git
+  - gnupg
+  - htop
+  - jq
+  - keychain
+  - lf
+  - man-db
+  - man-pages
+  - net-tools
+  - neovim
+  - openssh
+  - pinentry
+  - ripgrep
+  - rsync
+  - tmux
+  - tree
+  - unzip
+  - vim
+  - wget
+  - zoxide
+  - zsh
+
+# fd configuration (Arch names it fd, no symlink needed)
+fd_needs_symlink: false

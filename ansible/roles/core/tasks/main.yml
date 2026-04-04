@@ -1,0 +1,60 @@
+---
+# Load distribution-specific variables
+- name: Load distribution-specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_facts['distribution'] }}.yml"
+    - "{{ ansible_facts['os_family'] }}.yml"
+  tags: always
+
+- name: Install core packages (Debian/Ubuntu)
+  apt:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: true
+  become: yes
+  become_method: sudo
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Install core packages (Arch Linux)
+  community.general.pacman:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: true
+  become: yes
+  become_method: sudo
+  when: ansible_facts['os_family'] == "Archlinux"
+
+- name: Change shell to ZSH
+  become: yes
+  user:
+    shell: /bin/zsh
+    name: "{{ ansible_facts['user_id'] }}"
+
+- name: Ensure fi locale exists
+  community.general.locale_gen:
+    name: fi_FI.UTF-8
+    state: present
+  become: yes
+  become_method: sudo
+  ignore_errors: true
+
+- name: Ensure ~/.local/bin exists
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.local/bin"
+    state: directory
+    mode: "0700"
+
+- name: Symlink fdfind to fd
+  ansible.builtin.file:
+    src: "{{ fd_binary_path }}"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/bin/fd"
+    state: link
+  when: fd_needs_symlink | default(false)
+
+- name: Symlink batcat to bat
+  ansible.builtin.file:
+    src: "{{ bat_binary_path }}"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/bin/bat"
+    state: link
+  when: bat_needs_symlink | default(false)

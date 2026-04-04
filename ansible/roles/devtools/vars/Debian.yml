@@ -2,62 +2,30 @@
 # Debian/Ubuntu package names and configuration
 
 packages:
-  - bat
-  - btop
   - ccze
   - cloc
-  - curl
-  - fd-find
   - fswatch
   - fuse
-  - fzf
-  - git
   - git-delta
-  - gnupg2
-  - gnupg-agent
-  - htop
   - inotify-tools
-  - jq
-  - keychain
   - lazygit
-  - lf
-  - locales
-  - net-tools
   - nmap
   - nodejs
   - npm
-  - pinentry-curses
   - pipx
   - python-is-python3
   - python3-pip
   - python3-venv
   - ranger
   - rustup
-  - scdaemon
   - shellcheck
-  - ripgrep
-  - tmux
-  - tree
-  - unzip
-  - vim
   - virtualenvwrapper
-  - wget
   - wl-clipboard
   - xclip
-  - zoxide
-  - zsh
-
-# fd symlink configuration (Debian names it fd-find)
-fd_needs_symlink: true
-fd_binary_path: /usr/bin/fdfind
-
-# bat symlink configuration (Debian names it batcat)
-bat_needs_symlink: true
-bat_binary_path: /usr/bin/batcat
 
 # Cargo packages to install
 cargo_packages:
   - uv
 
-# Whether to download NeoVim AppImage
+# Whether to download NeoVim AppImage (apt repos have old version)
 neovim_appimage: true

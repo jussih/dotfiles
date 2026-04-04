@@ -3,33 +3,14 @@
 
 packages:
   - base-devel
-  - bat
-  - bind # for dig
-  - btop
   - cloc
-  - curl
-  - diffutils
-  - fd
   - fuse3
-  - fzf
-  - git
   - git-delta
   - glibc
-  - gnupg
-  - htop
   - inotify-tools
-  - jq
-  - keychain
   - lazygit
-  - lf
-  - man-db
-  - man-pages
-  - net-tools
-  - neovim
   - nmap
   - nodejs
-  - openssh
-  - pinentry
   - posix-c-development
   - posix-software-development
   - python
@@ -37,27 +18,14 @@ packages:
   - python-pipx
   - python-virtualenvwrapper
   - ranger
-  - ripgrep
-  - rsync
   - rustup
   - shellcheck
   - strace
-  - openssh
   - texinfo
-  - tmux
-  - tree
-  - unzip
   - uv
-  - vim
-  - wget
   - wl-clipboard
   - xclip
   - xdg-utils
-  - zoxide
-  - zsh
-
-# fd configuration (Arch names it fd, no symlink needed)
-fd_needs_symlink: false
 
 # Cargo packages to install (prefer pacman packages)
 cargo_packages: []

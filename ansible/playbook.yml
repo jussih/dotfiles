@@ -4,4 +4,7 @@
   hosts: localhost
   become: no
   roles:
-    - devtools
+    - role: core
+      tags: core
+    - role: devtools
+      tags: devtools

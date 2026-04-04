@@ -15,6 +15,8 @@ sudo pacman -Sy --needed --noconfirm ansible stow make
 
 echo ""
 echo "Bootstrap complete! You can now run:"
-echo "  make install-arch  - Install packages with Ansible"
-echo "  make stow          - Install dotfiles with Stow"
-echo "  make arch          - Run both install-arch and stow"
+echo "  make install-arch       - Install packages with Ansible"
+echo "  make install-arch-core  - Install core role only with Ansible"
+echo "  make stow               - Install dotfiles with Stow"
+echo "  make arch               - Run install-arch + stow"
+echo "  make arch-core          - Run install-arch-core + stow"
