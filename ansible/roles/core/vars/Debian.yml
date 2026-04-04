@@ -35,6 +35,3 @@ fd_binary_path: /usr/bin/fdfind
 # bat symlink configuration (Debian names it batcat)
 bat_needs_symlink: true
 bat_binary_path: /usr/bin/batcat
-
-# Whether to download NeoVim AppImage
-neovim_appimage: false
