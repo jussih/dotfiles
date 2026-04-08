@@ -13,6 +13,9 @@
     # handy for squashing commits
     # example: git rebasetobase main
     rebasetobase = rebase -i --keep-base
+    hotspots = !git log --format=format: --name-only --since='1 year ago' | sort | uniq -c | sort -nr | head -20
+    pace = !git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
+    who = shortlog -sn --no-merges
 
     ddiff = -c core.pager=delta diff
     dlog = -c core.pager=delta log -p
