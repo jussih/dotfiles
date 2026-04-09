@@ -21,6 +21,7 @@ packages:
   - rustup
   - shellcheck
   - strace
+  - tealdeer
   - texinfo
   - tree-sitter-cli
   - uv

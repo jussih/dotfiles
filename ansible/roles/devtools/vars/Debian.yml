@@ -19,6 +19,7 @@ packages:
   - ranger
   - rustup
   - shellcheck
+  - tealdeer
   - tree-sitter-cli
   - virtualenvwrapper
   - wl-clipboard
