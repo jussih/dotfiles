@@ -8,6 +8,7 @@ packages:
   - git-delta
   - glibc
   - inotify-tools
+  - kdiff3
   - lazygit
   - nmap
   - nodejs
