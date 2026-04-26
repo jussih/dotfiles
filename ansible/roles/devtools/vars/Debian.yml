@@ -3,12 +3,14 @@
 
 packages:
   - ccze
+  - clang-tools
   - cloc
   - fswatch
   - fuse
   - git-delta
   - inotify-tools
   - lazygit
+  - lf
   - nmap
   - nodejs
   - npm
@@ -17,6 +19,7 @@ packages:
   - python3-pip
   - python3-venv
   - ranger
+  - rust-analyzer
   - rustup
   - shellcheck
   - tealdeer
@@ -27,6 +30,7 @@ packages:
 
 # Cargo packages to install
 cargo_packages:
+  - ruff
   - uv
 
 # Whether to download NeoVim AppImage (apt repos have old version)

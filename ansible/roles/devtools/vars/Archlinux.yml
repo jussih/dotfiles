@@ -3,6 +3,7 @@
 
 packages:
   - base-devel
+  - clang
   - cloc
   - fuse3
   - git-delta
@@ -10,6 +11,8 @@ packages:
   - inotify-tools
   - kdiff3
   - lazygit
+  - lf
+  - lua-language-server
   - nmap
   - nodejs
   - posix-c-development
@@ -19,12 +22,15 @@ packages:
   - python-pipx
   - python-virtualenvwrapper
   - ranger
+  - rust-analyzer
   - rustup
   - shellcheck
   - strace
+  - stylua
   - tealdeer
   - texinfo
   - tree-sitter-cli
+  - ty
   - uv
   - wl-clipboard
   - xclip
