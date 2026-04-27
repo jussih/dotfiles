@@ -11,7 +11,6 @@ packages:
   - inotify-tools
   - kdiff3
   - lazygit
-  - lf
   - lua-language-server
   - nmap
   - nodejs
@@ -22,6 +21,7 @@ packages:
   - python-pipx
   - python-virtualenvwrapper
   - ranger
+  - ruff
   - rust-analyzer
   - rustup
   - shellcheck
