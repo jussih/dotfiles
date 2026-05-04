@@ -1,87 +1,9 @@
 " ========== Vim Basic Settings ============="
 
-" Pathogen settings.
-set nocompatible
-filetype off
-
-" First time install
-let VundleExists=0
-let vundle_readme=expand($HOME.'/.vim/bundle/Vundle.vim/README.md')
-if !filereadable(vundle_readme)
-    echo "Installing Vundle.."
-    echo ""
-    silent !mkdir -p $HOME/.vim/bundle
-    silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    let VundleExists=1
-endif
-
-" Run :PluginInstall if plugins are not autoinstalled
-if has('vim_starting')
-  set rtp+=~/.vim/bundle/Vundle.vim
-endif
-
-" Vundle + Plugins
-call vundle#begin()
-" List plugins here
-Plugin 'airblade/vim-gitgutter'
-Plugin 'gmarik/Vundle.vim.git'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'ervandew/supertab'
-"Plugin 'godlygeek/tabular'
-"Plugin 'honza/vim-snippets'
-Plugin 'ctrlpvim/ctrlp.vim'
-let g:grepper = {}
-Plugin 'mhinz/vim-grepper'
-Plugin 'lepture/vim-jinja'
-"Plugin 'ludovicchabant/vim-lawrencium'
-"Plugin 'majutsushi/tagbar'
-"Plugin 'maxmeyer/vim-taskjuggler'
-Plugin 'sjl/badwolf'
-Plugin 'PotatoesMaster/i3-vim-syntax'
-"Plugin 'puppetlabs/puppet-syntax-vim'
-Plugin 'Raimondi/delimitMate'
-"Plugin 'rodjek/vim-puppet'
-"Plugin 'markcornick/vim-vagrant'
-"Plugin 'saltstack/salt-vim'
-"Plugin 'scrooloose/syntastic'
-Plugin 'SirVer/ultisnips'
-"Plugin 'tpope/vim-commentary'
-"Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-"Plugin 'vimez/vim-tmux'
-"Plugin 'xolox/vim-easytags'
-"Plugin 'xolox/vim-misc'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Yggdroot/indentLine'
-"Plugin 'edkolev/tmuxline.vim'
-"Plugin 'evanmiller/nginx-vim-syntax'
-"Plugin 'voikko/corevoikko', {'rtp': 'tools/vim'}
-Plugin 'othree/html5.vim'
-"Plugin 'mattn/emmet-vim'
-"Plugin 'gregsexton/MatchTag'
-Plugin 'editorconfig/editorconfig-vim'
-"Plugin 'elixir-lang/vim-elixir'
-Plugin 'w0rp/ale'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'epilande/vim-react-snippets'
-call vundle#end()
-
-filetype plugin indent on
-
-
-if VundleExists == 1
-    echo "Installing Plugins"
-    echo ""
-    :PluginInstall
-endif
-
 " basic settings
 scriptencoding utf-8
 set encoding=utf-8              " setup the encoding to UTF-8
+set nocompatible
 "set visualbell                 " turn on the visual bell
 set cursorline                  " highlight the line under the cursor
 set fillchars+=vert:│           " better looking for windows separator
@@ -139,7 +61,7 @@ set matchtime=3
 
 " Leader Key mappings
 " Changing Leader Key
-let mapleader = ","
+let mapleader = " "
 
 " open split
 nnoremap <Leader>v <C-w>v
@@ -192,16 +114,15 @@ hi User3 guifg=#ff66ff guibg=#222922 ctermbg=17
 hi User4 guifg=#a0ee40 guibg=#222922 ctermbg=17
 hi User5 guifg=#eeee40 guibg=#222922 ctermbg=17
 
-"statusline managed by airline
-"set statusline=
-"set statusline +=%1*\ %n\ %*            "buffer number
-"set statusline +=%5*%{&ff}%*            "file format
-"set statusline +=%3*%y%*                "file type
-"set statusline +=%4*\ %<%F%*            "full path
-"set statusline +=%2*%m%*                "modified flag
-"set statusline +=%{HasPaste()}         "paste flag
-"set statusline +=%1*%=%5l%*             "current line
-"set statusline +=%2*/%L%*               "total lines
+set statusline=
+set statusline +=%1*\ %n\ %*            "buffer number
+set statusline +=%5*%{&ff}%*            "file format
+set statusline +=%3*%y%*                "file type
+set statusline +=%4*\ %<%F%*            "full path
+set statusline +=%2*%m%*                "modified flag
+set statusline +=%{HasPaste()}         "paste flag
+set statusline +=%1*%=%5l%*             "current line
+set statusline +=%2*/%L%*               "total lines
 
 " backups
 function! MakeDirIfNoExists(path)
@@ -271,8 +192,8 @@ let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_list_hide='.*\.swp$,.*\.pyc$'
-"nnoremap <F3> :Vexplore<cr>
-"inoremap <F3> :Vexplore<cr>
+nnoremap <F3> :Vexplore<cr>
+inoremap <F3> :Vexplore<cr>
 
 " Make Sure that Vim returns to the same line when we reopen a file
 augroup line_return
@@ -357,7 +278,7 @@ if has("gui_running")
 else
     "set t_Co=256
     set background=dark
-    colorscheme badwolf
+    colorscheme catppuccin
     "fix ctrl-arrow keys with putty
     map <ESC>[D <C-Left>
     map <ESC>[C <C-Right>
@@ -377,109 +298,6 @@ endif
 
 
 " ========== END Gvim Settings ==========
-
-
-" ========== Plugin Settings =========="
-
-" ALE
-let g:ale_lint_delay = 1000
-let g:ale_linters = {'python': ['flake8', 'pylint']}
-
-" ctrlp
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPBuffer'
-let g:ctrlp_working_path_mode = 'w'
-"noremap <c-b> :CtrlPBuffer<cr>
-
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
-if executable('rg')
-  " Use Rg over Ag and Grep
-  set grepprg=rg\ --no-heading\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-endif
-
-" NERDTree
-nnoremap <F3> :NERDTreeToggle<cr>
-let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
-let NERDTreeChDirMode = 2
-
-" SuperTab
-"let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-"let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-"let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
-let g:SuperTabDefaultCompletionType = "context"
-"let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-
-" DelimitMate
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
-
-" airline
-set noshowmode
-let g:airline#extensions#branch#enabled = 1
-let g:airline_powerline_fonts=1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline_section_z = '%l/%L' "lines / totalLines
-let g:airline#extensions#ale#enabled = 1
-
-" Jedi
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#show_call_signatures = 0 "sometimes buggy
-let g:jedi#popup_on_dot = 0
-
-"" Syntastic 
-"let g:syntastic_python_checkers = ['flake8']
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_echo_current_error = 1
-"let g:syntastic_aggregate_errors = 1
-"let g:syntastic_cursor_column = 1
-"let g:syntastic_python_flake8_args="--ignore=E111,E121,E501,W391"
-"let g:syntastic_enable_highlighting = 1
-"nnoremap <F11> :w<cr>:SyntasticCheck<cr>:Errors<cr>
-"inoremap <F11> <ESC>:w<cr>:SyntasticCheck<cr>:Errors<cr>
-
-" Ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:ultisnips_python_style = "sphinx"
-let g:UltiSnipsEditSplit = "vertical"
-
-" indentline
-" disable globally. Enable only on some files
-let g:indentLine_enabled = 1
-let g:indentLine_char = '┊'
-"let g:indentLine_char = '│'
-let g:indentLine_color_term = 239
-let g:indentLine_fileType = ['python', 'puppet', 'sls', 'html', 'js']
-nmap <F6> :IndentLinesToggle<CR>
-imap <F6> <ESC>:IndentLinesToggle<CR>i
-
-" vim-grepper 
-nmap <Leader>a :Grepper<cr>
-let g:grepper.tools = ['rg', 'ag', 'ack', 'git', 'grep']
-let g:grepper.ag = {
-    \ 'grepprg':    'ag --ignore eggs/ --ignore coverage/ --ignore staticroot/ -U -i',
-    \ 'grepformat': '%f:%l:%m',
-    \ 'escape':     '\^$.*[]',
-    \ }
-let g:grepper.rg = {
-    \ 'grepprg':    'rg -g "!{eggs,coverage,staticroot}/*" -g "!{.git,.hg,.node-modules}/*" --no-ignore --vimgrep -S',
-    \ 'grepformat': '%f:%l:%m',
-    \ 'escape':     '\^$.*[]',
-    \ }
-
-"
-" =========== END Plugin Settings =========="
-"
-
 
 """ Local Specific Configuration
 " Use local vimrc if available
