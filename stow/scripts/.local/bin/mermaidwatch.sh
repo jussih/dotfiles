@@ -63,7 +63,7 @@ while read -r date time dir file; do
       changed_rel=${changed_abs#"$watch_path"/}
       output_file="$changed_abs.$output_format"
 
-      if mmdc --theme default --iconPacks @iconify-json/logos -i "$changed_abs" -o "$output_file"; then
+      if npx -p @mermaid-js/mermaid-cli mmdc --theme default --iconPacks @iconify-json/logos -i "$changed_abs" -o "$output_file"; then
           echo "[${date} ${time}] $changed_rel -> $changed_rel.$output_format" >&2
           open_in_browser "$output_file"
       fi
